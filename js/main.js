@@ -7,10 +7,6 @@ function getRandomIntInclusive(min, max) {
 getRandomIntInclusive();
 
 //second function
-function commentLength (str, maxLength) {
-  if ( str.length > maxLength) {
-    return true;
-  }
-  return false;
-}
+let commentLength = (str, maxLength) => str.length < maxLength;
+
 commentLength('kjdsklfjalksdjl', 10);
