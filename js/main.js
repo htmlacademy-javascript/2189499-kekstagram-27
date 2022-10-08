@@ -38,6 +38,7 @@ const DESCRIPTION = [
   '«Думаю…Я много думаю». 😜',
 ];
 
+const PHOTO_NUMBER_ELEMENTS = 25;
 
 //ФУНКЦИЯ РАНДОМА
 function getRandomIntInclusive(min, max) {
@@ -74,6 +75,6 @@ const createPhoto = () => ({
 
 console.log(createPhoto());
 //СОЗДАНИЕ МАССИВА ИЗ N ЭЛЕМЕНТОВ
-const photo = Array.from({length:25},createPhoto);
+const photo = Array.from({length:PHOTO_NUMBER_ELEMENTS}, createPhoto);
 
 console.log(photo);
