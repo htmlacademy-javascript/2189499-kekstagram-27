@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-
-
 //ЗАДАЕМ ПАРАМЕТРЫ ДЛЯ ФОТОГРАФИЙ
 
 
@@ -73,8 +70,8 @@ const createPhoto = () => ({
   },
 });
 
-console.log(createPhoto());
+
 //СОЗДАНИЕ МАССИВА ИЗ N ЭЛЕМЕНТОВ
 const photo = Array.from({length:PHOTO_NUMBER_ELEMENTS}, createPhoto);
 
-console.log(photo);
+
