@@ -26,8 +26,8 @@ const url = createRandomIdFromRange(1, 25);
 //функция для создания photo
 const createPhoto = () => ({
 
-    id: id(1, 25),
-    url: `photos/${url(1, 25)}.jpg`,
+    id: id(),
+    url: `photos/${url()}.jpg`,
     description: getRandomElement(DESCRIPTION),
     likes: getRandomIntInclusive(15, 200),
     comments: {
