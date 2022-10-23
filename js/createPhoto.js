@@ -37,5 +37,5 @@ const createPhoto = () => ({
 });
 
 //СОЗДАНИЕ МАССИВА ИЗ N ЭЛЕМЕНТОВ
-const photo = Array.from({length:PHOTO_NUMBER_ELEMENTS}, createPhoto);
+const photo = (count) => Array.from({length:count}, createPhoto);
 export {photo};
