@@ -30,7 +30,7 @@ const createPhoto = () => ({
   likes: getRandomIntInclusive(15, 200),
   comments: {
     id: getRandomIntInclusive(1, 200),
-    avatar:` img/avatar-${getRandomIntInclusive(0, 6)}.svg`,
+    avatar:` img/avatar-${getRandomIntInclusive(1, 6)}.svg`,
     message: getRandomElement(MESSAGES),
     name:getRandomElement(NAMES),
   },
