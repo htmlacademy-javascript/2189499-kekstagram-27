@@ -34,8 +34,7 @@ arrayOfPictures.forEach((element, index) => {
     socialCaption.textContent = similarPhoto[index].description;
 
     //добавляем body класс modal-open
-    const body = document.querySelector('body');
-    body.classList.add('modal-open');
+    document.body.classList.add('modal-open');
 
     // скрываем коментарии после открытия
     const socialCommentCount = document.querySelector('.social__comment-count');
@@ -48,10 +47,12 @@ arrayOfPictures.forEach((element, index) => {
 // закрытие окна при помощи крестика
 closeBtn.addEventListener('click', () => {
   bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
 });
 
 window.addEventListener('keydown', (evt) => {
   if (isEscKeydow) {
     bigPicture.classList.add('hidden');
+    document.body.classList.remove('modal-open');
   };
 });
