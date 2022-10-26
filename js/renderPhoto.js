@@ -10,6 +10,13 @@ const commentsCount = document.querySelector('.comments-count');
 const socialComments = document.querySelector('.social__comments').querySelectorAll('li');
 const socialCaption = pictureSocial.querySelector('.social__caption');
 const closeBtn = document.querySelector('#picture-cancel');
+
+//функция удаления класа modal-open и скрытие через класс hiden 
+const hiddenPhoto = function() {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+};
+
 arrayOfPictures.forEach((element, index) => {
   element.addEventListener('click', () => {
 
@@ -46,13 +53,11 @@ arrayOfPictures.forEach((element, index) => {
 
 // закрытие окна при помощи крестика
 closeBtn.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  document.body.classList.remove('modal-open');
+  hiddenPhoto();
 });
 
 window.addEventListener('keydown', (evt) => {
   if (isEscKeydow) {
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
+    hiddenPhoto();
   };
 });
