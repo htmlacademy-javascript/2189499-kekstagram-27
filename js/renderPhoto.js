@@ -1,4 +1,5 @@
 import { similarPhoto } from './miniatures.js';
+import { isEscKeydow } from './utils.js' 
 const pictures = document.querySelectorAll('.picture');
 const arrayOfPictures = Array.from(pictures);
 const bigPicture = document.querySelector('.big-picture');
@@ -50,7 +51,7 @@ closeBtn.addEventListener('click', () => {
 });
 
 window.addEventListener('keydown', (evt) => {
-  if (evt.keyCode === 27) {
+  if (isEscKeydow) {
     bigPicture.classList.add('hidden');
   };
 });
