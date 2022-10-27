@@ -12,7 +12,7 @@ const socialCaption = pictureSocial.querySelector('.social__caption');
 const closeBtn = document.querySelector('#picture-cancel');
 
 //функция удаления класа modal-open и скрытие через класс hiden 
-const hiddenPhoto = function() {
+const hidePhoto = function() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
 };
@@ -53,11 +53,11 @@ arrayOfPictures.forEach((element, index) => {
 
 // закрытие окна при помощи крестика
 closeBtn.addEventListener('click', () => {
-  hiddenPhoto();
+  hidePhoto();
 });
 
 window.addEventListener('keydown', (evt) => {
   if (isEscKeydow) {
-    hiddenPhoto();
+    hidePhoto();
   };
 });
