@@ -4,7 +4,12 @@ const uploadFile = document.getElementById('upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 
-
+const onPopupEscKeydown = (evt) => {
+  if (isEscButton(evt)) {
+    evt.preventDefault();
+    closeUploadPhoto();
+  };
+};
 
 function openUploadPhoto(evt) {
   evt.preventDefault();
