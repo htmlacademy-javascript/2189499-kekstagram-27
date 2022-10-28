@@ -1,21 +1,26 @@
-import { isEscButton } from './utils.js'
+import { isEscButton } from './utils.js';
 
 const uploadFile = document.getElementById('upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 
 
-const openUploadPhoto = function(evt) {
-    evt.preventDefault();
-    imgUploadOverlay.classList.remove('hidden');
-    document.body.classList.add('modal-open');
+
+function openUploadPhoto(evt) {
+  evt.preventDefault();
+  imgUploadOverlay.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+
+  document.addEventListener('keydown', onPopupEscKeydown);
 };
 
 
-const closeUploadPhoto = function() {
-    imgUploadOverlay.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-    uploadFile.value = '';
+function closeUploadPhoto() {
+  imgUploadOverlay.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  uploadFile.value = '';
+
+  document.removeEventListener('keydown', onPopupEscKeydown);
 };
 
 
@@ -24,9 +29,4 @@ uploadFile.addEventListener('change', openUploadPhoto);
 //закрытие окна при помощи Х
 imgUploadCancel.addEventListener('click', closeUploadPhoto);
 
-//закртие окна при помощи клавиши ESC
-window.addEventListener('keydown', (evt)=> {
-    if (isEscButton) {
-        closeUploadPhoto();     
-    }
-});
+

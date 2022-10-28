@@ -1,5 +1,5 @@
 import { similarPhoto } from './miniatures.js';
-import { isEscButton } from './utils.js' 
+import { isEscButton } from './utils.js';
 const pictures = document.querySelectorAll('.picture');
 const arrayOfPictures = Array.from(pictures);
 const bigPicture = document.querySelector('.big-picture');
@@ -10,6 +10,8 @@ const commentsCount = document.querySelector('.comments-count');
 const socialComments = document.querySelector('.social__comments').querySelectorAll('li');
 const socialCaption = pictureSocial.querySelector('.social__caption');
 const closeBtn = document.querySelector('#picture-cancel');
+
+
 
 //функция удаления класа modal-open и скрытие через класс hiden 
 const hidePhoto = function() {

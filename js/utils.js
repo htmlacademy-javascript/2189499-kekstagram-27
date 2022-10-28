@@ -14,6 +14,6 @@ const commentLength = (str, maxLength) => str.length < maxLength;
 const getRandomElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
 //проверка нажатой кнопки Esc
-const isEscButton = (evt) => evt.key === 'Escape' 
-
+const isEscButton = (evt) => evt.key === 'Escape';
+console.log(isEscButton);
 export {getRandomElement, getRandomIntInclusive, isEscButton};
