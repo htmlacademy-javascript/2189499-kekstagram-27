@@ -11,9 +11,16 @@ const socialComments = document.querySelector('.social__comments').querySelector
 const socialCaption = pictureSocial.querySelector('.social__caption');
 const closeBtn = document.querySelector('#picture-cancel');
 
+//ESC
+const onPopupEscKeydown = (evt) => {
+  if (isEscButton(evt)) {
+    evt.preventDefault();
+    hidePhoto();
+  };
+};
 
 //функция удаления класа modal-open и скрытие через класс hiden 
-const hidePhoto = function() {
+function hidePhoto() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
@@ -56,20 +63,10 @@ const showPhoto = function(element,index) {
   document.addEventListener('keydown', onPopupEscKeydown);
 };
 
-
-//ESC
-const onPopupEscKeydown = (evt) => {
-  if (isEscButton(evt)) {
-    evt.preventDefault();
-    hidePhoto();
-  };
-};
-
-
 arrayOfPictures.forEach((element, index) => {
   element.addEventListener('click', (evt) => {
     showPhoto(element,index);
-});
+  });
 });
 
 // закрытие окна при помощи крестика
