@@ -1,16 +1,21 @@
 
 
 const form = document.getElementById('upload-select-image');
+const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
+console.log(hashtag.test());
 // create the pristine instance
 const pristine = new Pristine(form);
 
-function isHashtagValid(value) {
-  return value.length >= 2 && value.length <= 50;
+function isHashtagValid() {
+  const input = document.querySelector('.text__hashtags').value;
+  console.log(input);
+  // настройки для валидации
+  return hashtag.test(input) || input === '';
+  // return value.length >= 2 && value.length <= 50;
 };
 
-pristine.addValidator(form.querySelector('#upload-file'),isHashtagValid,
-  'От 2 до 50 символов');
+pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
 
 
 form.addEventListener('submit', (e) => {
