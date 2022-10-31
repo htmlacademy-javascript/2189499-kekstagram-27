@@ -3,20 +3,32 @@
 const form = document.getElementById('upload-select-image');
 const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const commentValue = /.{1,140}$/i;
-console.log(hashtag.test());
-// create the pristine instance
 const pristine = new Pristine(form);
 
 function isHashtagValid(ret) {
 
   const input = document.querySelector('.text__hashtags').value;
   let b;
+
   const arrayOfInput = input.split(/\s/);
   arrayOfInput.forEach(element => {
     b = hashtag.test(element);
     ret = b;
   });
-  return ret || input === '';
+
+
+  // eslint-disable-next-line no-unused-expressions
+  const hashtagCount = input.replace(/[^#]/g, '').length;
+
+  function isHashtagCount () {
+    if (hashtagCount <= 5) {
+      return true;
+    } else {
+      return false;
+    };
+};
+
+  return (ret || input === '' ) && isHashtagCount();
 };
 
 pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
