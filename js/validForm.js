@@ -4,6 +4,21 @@ const pristine = new Pristine(form);
 
 function isHashtagValid() {
   const input = document.querySelector('.text__hashtags').value;
+
+  const lowerCaseInput = input.toLowerCase().split(' ');
+
+
+  function count(array){
+    let bool = 0;
+    const names = {};
+    array.forEach((item) => {
+      names[item] = (names[item] || 0) + 1;
+      bool = (names[item] <= 1);
+    });
+    return bool;
+  }
+
+
   const arrayOfHashtags = input.split(' ');
   const areAllHashtagsValid = arrayOfHashtags.every((elem) => hashtag.test(elem));
   const hashtagCount = input.replace(/[^#]/g, '').length;
@@ -14,7 +29,7 @@ function isHashtagValid() {
       return false;
     }
   }
-  return areAllHashtagsValid && isHashtagCount() || input === '';
+  return count(lowerCaseInput) && areAllHashtagsValid && isHashtagCount() || input === '';
 }
 
 pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
