@@ -5,22 +5,21 @@ const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const commentValue = /.{1,140}$/i;
 const pristine = new Pristine(form);
 
-function isHashtagValid(ret) {
+
+
+function isHashtagValid() {
 
   const input = document.querySelector('.text__hashtags').value;
-
-
-  let areAllHashtagsValid;
   const arrayOfInput = input.split(' ');
-  arrayOfInput.forEach(element => {
-    areAllHashtagsValid = hashtag.test(element);
-    ret = areAllHashtagsValid;
-  });
 
 
-  // eslint-disable-next-line no-unused-expressions
+  function areAllHashtagsValidChecked(elem) {
+    return hashtag.test(elem);
+  }
+  const arr = arrayOfInput.every(areAllHashtagsValidChecked);
+
+
   const hashtagCount = input.replace(/[^#]/g, '').length;
-
   function isHashtagCount () {
     if (hashtagCount <= 5) {
       return true;
@@ -29,7 +28,7 @@ function isHashtagValid(ret) {
     };
 };
 
-  return (ret || input === '' ) && isHashtagCount();
+  return (arr || input === '' ) && isHashtagCount();
 };
 
 pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
