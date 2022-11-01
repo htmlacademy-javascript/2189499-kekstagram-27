@@ -10,13 +10,13 @@ const pristine = new Pristine(form);
 function isHashtagValid() {
 
   const input = document.querySelector('.text__hashtags').value;
-  const arrayOfInput = input.split(' ');
+  const arrayOfHashtags = input.split(' ');
 
 
   function areAllHashtagsValidChecked(elem) {
     return hashtag.test(elem);
   }
-  const arr = arrayOfInput.every(areAllHashtagsValidChecked);
+  const arr = arrayOfHashtags.every(areAllHashtagsValidChecked);
 
 
   const hashtagCount = input.replace(/[^#]/g, '').length;
