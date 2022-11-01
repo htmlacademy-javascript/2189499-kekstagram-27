@@ -8,12 +8,13 @@ const pristine = new Pristine(form);
 function isHashtagValid(ret) {
 
   const input = document.querySelector('.text__hashtags').value;
-  let b;
 
-  const arrayOfInput = input.split(/\s/);
+
+  let areAllHashtagsValid;
+  const arrayOfInput = input.split(' ');
   arrayOfInput.forEach(element => {
-    b = hashtag.test(element);
-    ret = b;
+    areAllHashtagsValid = hashtag.test(element);
+    ret = areAllHashtagsValid;
   });
 
 
