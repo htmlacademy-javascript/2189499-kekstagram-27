@@ -12,20 +12,19 @@ function isHashtagValid() {
       return true;
     } else {
       return false;
-    };
-};
+    }
+  }
   return (areAllHashtagsValid || input === '' ) && isHashtagCount();
-};
+}
 
 pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
 
 function isCommentValid() {
   const comment = document.querySelector('.text__description').value;
   return comment.length <= 140 || comment === '';
-};
+}
 
 pristine.addValidator(form.querySelector('.text__description'),isCommentValid);
-
 
 
 form.addEventListener('submit', (e) => {
@@ -35,6 +34,6 @@ form.addEventListener('submit', (e) => {
     console.log('валидна');
   } else {
     console.log('не валидна');
-  };
+  }
 });
 

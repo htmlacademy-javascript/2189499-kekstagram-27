@@ -17,7 +17,7 @@ const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
     evt.preventDefault();
     hidePhoto();
-  };
+  }
 };
 
 //функция удаления класа modal-open и скрытие через класс hiden
@@ -25,12 +25,12 @@ function hidePhoto() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 
 //функция для показа окна
 function showPhoto(element,index) {
-  
+
   bigPicture.classList.remove('hidden');
 
   //добавляем картинку
@@ -62,7 +62,7 @@ function showPhoto(element,index) {
 
   //---
   document.addEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 arrayOfPictures.forEach((element, index) => {
   element.addEventListener('click', (evt) => {
