@@ -14,14 +14,14 @@ function isHashtagValid() {
       return false;
     }
   }
-  return (areAllHashtagsValid || input === '' ) && isHashtagCount();
+  return areAllHashtagsValid && isHashtagCount() || input === '';
 }
 
 pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
 
 function isCommentValid() {
   const comment = document.querySelector('.text__description').value;
-  return comment.length <= 140 || comment === '';
+  return comment.length <= 140;
 }
 
 pristine.addValidator(form.querySelector('.text__description'),isCommentValid);
