@@ -8,7 +8,7 @@ const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
     evt.preventDefault();
     closeUploadPhoto();
-  };
+  }
 };
 
 function openUploadPhoto(evt) {
@@ -17,7 +17,7 @@ function openUploadPhoto(evt) {
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 
 function closeUploadPhoto() {
@@ -26,7 +26,7 @@ function closeUploadPhoto() {
   uploadFile.value = '';
 
   document.removeEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 
 //открытие окна

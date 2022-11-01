@@ -11,25 +11,26 @@ const socialComments = document.querySelector('.social__comments').querySelector
 const socialCaption = pictureSocial.querySelector('.social__caption');
 const closeBtn = document.querySelector('#picture-cancel');
 
+
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
     evt.preventDefault();
     hidePhoto();
-  };
+  }
 };
 
-//функция удаления класа modal-open и скрытие через класс hiden 
+//функция удаления класа modal-open и скрытие через класс hiden
 function hidePhoto() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 
 //функция для показа окна
-const showPhoto = function(element,index) {
-  
+function showPhoto(element,index) {
+
   bigPicture.classList.remove('hidden');
 
   //добавляем картинку
@@ -61,7 +62,7 @@ const showPhoto = function(element,index) {
 
   //---
   document.addEventListener('keydown', onPopupEscKeydown);
-};
+}
 
 arrayOfPictures.forEach((element, index) => {
   element.addEventListener('click', (evt) => {
@@ -72,4 +73,16 @@ arrayOfPictures.forEach((element, index) => {
 // закрытие окна при помощи крестика
 closeBtn.addEventListener('click', () => {
   hidePhoto();
+});
+
+//если фокус на инпуте хештега
+const hashContent = document.querySelector('.text__hashtags');
+hashContent.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
+});
+
+//если фокус на инпуте комментария
+const commentContent = document.querySelector('.text__description');
+commentContent.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
 });

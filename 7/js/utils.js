@@ -15,5 +15,5 @@ const getRandomElement = (elements) => elements[getRandomIntInclusive(0, element
 
 //проверка нажатой кнопки Esc
 const isEscButton = (evt) => evt.key === 'Escape';
-console.log(isEscButton);
+
 export {getRandomElement, getRandomIntInclusive, isEscButton};
