@@ -5,8 +5,9 @@ const pristine = new Pristine(form);
 function isHashtagValid() {
   const input = document.querySelector('.text__hashtags').value;
   const lowerCaseInput = input.toLowerCase().split(' ');
-  const set = new Set(lowerCaseInput);
-  const isHashtagRepeat = (set.size === lowerCaseInput.length);
+
+  const isHashtagRepeat = (new Set(lowerCaseInput).size === lowerCaseInput.length);
+
   const areAllHashtagsValid = lowerCaseInput.every((elem) => hashtag.test(elem));
   const hashtagCount = input.replace(/[^#]/g, '').length;
   function isHashtagCount () {
