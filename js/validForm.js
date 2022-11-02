@@ -18,9 +18,7 @@ function isHashtagValid() {
     return bool;
   }
 
-
-  const arrayOfHashtags = input.split(' ');
-  const areAllHashtagsValid = arrayOfHashtags.every((elem) => hashtag.test(elem));
+  const areAllHashtagsValid = lowerCaseInput.every((elem) => hashtag.test(elem));
   const hashtagCount = input.replace(/[^#]/g, '').length;
   function isHashtagCount () {
     if (hashtagCount <= 5) {
