@@ -33,7 +33,13 @@ function onSmallerButtonClick() {
     return scaleImage(newValue);
 };
 
+function resetScale() {
+    return scaleImage(DEFAULT_SCALE);
+};
+
 smallerBtn.addEventListener('click', onSmallerButtonClick);
 
 
 biggerBtn.addEventListener('click', OnBiggerButtonClick);
+
+export {resetScale}
