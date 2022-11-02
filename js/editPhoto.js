@@ -1,35 +1,38 @@
 const formBtn = document.querySelector('.img-upload__scale');
 const smallerBtn = formBtn.querySelector('.scale__control--smaller');
 const biggerBtn = formBtn.querySelector('.scale__control--bigger');
-let valueBtn = formBtn.querySelector('.scale__control--value').value;
+const image = document.querySelector('.img-upload__preview');
+let valueBtn = formBtn.querySelector('.scale__control--value');
+
+const SCALE_STEP = 25;
+const MIN_SCALE = 25;
+const MAX_SCALW = 100;
+const DEFAULT_SCALE = 100;
+
+function scaleImage (value = DEFAULT_SCALE) {
+    image.style.transform = `scace(${value / 100})`;
+    valueBtn.value = `${value}%`;
+};
+
+function OnBiggerButtonClick() {
+    const currentValue = parseInt(valueBtn.value, 10);
+    let newValue = currentValue + SCALE_STEP;
+    if (newValue < MIN_SCALE) {
+        newValue = MIN_SCALE;
+    }
+    return scaleImage(newValue);
+};
+
+function onSmallerButtonClick() {
+    const currentValue = parseInt(valueBtn.value, 10);
+    let newValue = currentValue - SCALE_STEP;
+    if (newValue > MIN_SCALE) {
+        newValue = MIN_SCALE;
+    }
+    return scaleImage(newValue);
+};
+
+smallerBtn.addEventListener('click', onSmallerButtonClick);
 
 
-
-smallerBtn.addEventListener('click', function() {
-    if (typeof(valueBtn) === 'string') {
-        valueBtn = Number(valueBtn.split('%').join(''));
-    };
-    if (valueBtn > 0) {
-    valueBtn -= 25;
-    };
-    console.log(valueBtn);
-    if (typeof(valueBtn) === 'number') {
-        valueBtn = String(valueBtn + '%');
-        console.log(valueBtn);
-    };
-});
-
-
-biggerBtn.addEventListener('click', function() {
-    if (typeof(valueBtn) === 'string') {
-        valueBtn = Number(valueBtn.split('%').join(''));
-    };
-    if (valueBtn < 100) {
-    valueBtn += 25;
-    };
-    console.log(valueBtn);
-    if (typeof(valueBtn) === 'number') {
-        valueBtn = String(valueBtn + '%');
-        console.log(valueBtn);
-    };
-});
+biggerBtn.addEventListener('click', OnBiggerButtonClick);
