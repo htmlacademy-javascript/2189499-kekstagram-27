@@ -16,7 +16,7 @@ const EFFECTS = [
     name: 'chrome',
     style: 'grayscale',
     min: 0,
-    max: 100,
+    max: 1,
     step: 0.1,
     unit: '',
   },
@@ -83,7 +83,6 @@ const onRadioChange = (evt) => {
     return;
   }
   choosenEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
-  console.log(choosenEffect);
   updateSlider();
 };
 
@@ -96,7 +95,6 @@ const onSliederUpdate = () => {
   }
   const sliderValue = sliderElement.noUiSlider.get();
   image.style.filter = `${choosenEffect.style}(${sliderValue}${choosenEffect.unit})`;
-  console.log(image.style.filter);
   image.classList.add(`effect__preview--${choosenEffect.name}`);
   effectLevel.value = sliderValue;
 };
