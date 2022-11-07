@@ -59,7 +59,15 @@ const EFFECTS = [
 const DEFAULT_EFFECT = EFFECTS[0];
 let choosenEffect = DEFAULT_EFFECT;
 
+
 const isDefault = () => choosenEffect === DEFAULT_EFFECT;
+
+const resetModalWindow = () => {
+  sliderElement.classList.add('hidden');
+  image.style.filter = 'none';
+  image.className = '';
+  effectLevel.value = '';
+};
 
 const updateSlider = () => {
   sliderElement.classList.remove('hidden');
@@ -112,3 +120,5 @@ updateSlider();
 
 form.addEventListener('change', onRadioChange);
 sliderElement.noUiSlider.on('update', onSliederUpdate);
+
+export {resetModalWindow};
