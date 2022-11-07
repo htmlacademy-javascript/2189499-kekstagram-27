@@ -87,6 +87,7 @@ const onRadioChange = (evt) => {
   updateSlider();
 };
 
+
 const makeImageAttributesNone = () => {
   image.style.filter = 'none';
   image.className = '';
