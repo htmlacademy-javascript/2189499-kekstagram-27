@@ -1,5 +1,6 @@
 import { isEscButton } from './utils.js';
-
+import { resetScale } from './editPhoto.js';
+import { resetModalWindow } from './effect.js';
 const uploadFile = document.getElementById('upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
@@ -24,7 +25,8 @@ function closeUploadPhoto() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
-
+  resetScale();
+  resetModalWindow();
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
