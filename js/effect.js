@@ -98,7 +98,7 @@ const resetModalWindow = () => {
   makeImageAttributesNone();
 };
 
-const onSliederUpdate = () => {
+const onSliderUpdate = () => {
   makeImageAttributesNone();
   if (isDefault()) {
     return;
@@ -121,6 +121,6 @@ noUiSlider.create(sliderElement, {
 updateSlider();
 
 form.addEventListener('change', onRadioChange);
-sliderElement.noUiSlider.on('update', onSliederUpdate);
+sliderElement.noUiSlider.on('update', onSliderUpdate);
 
 export {resetModalWindow};
