@@ -11,7 +11,16 @@ import { renderSimilarList } from './miniatures.js';
 const SIMILAR_WIZARD_COUNT = 10;
 
 fetch ('https://27.javascript.pages.academy/kekstagram/data')
-  .then((response) => response.json())
+  .then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      alert('error 200-299');
+    }
+  })
   .then((data) => {
-    renderSimilarList(data.slice(0, SIMILAR_WIZARD_COUNT));
-  });
+    renderSimilarList(data.slice(0, SIMILAR_WIZARD_COUNT))
+  })
+  .catch(() => alert('error url in fetch'));
+
+

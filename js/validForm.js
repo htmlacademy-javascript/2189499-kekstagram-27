@@ -41,9 +41,6 @@ form.addEventListener('submit', (evt) => {
       {
         method: 'POST',
         body: formData,
-        headers:{
-          'Content-Type': 'multipart/form-data',
-        },
       });
   }
 });
