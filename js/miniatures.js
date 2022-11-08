@@ -21,13 +21,13 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
-
 //функция удаления класа modal-open и скрытие через класс hiden
 function hidePhoto() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
+
 
 const array = [];
 // const similarPhoto = photo(8);
@@ -50,23 +50,38 @@ const renderSimilarList = (imagePhoto) => {
       //изменяем значение лайков
       likesCount.textContent = likes;
 
-      commentsCount.textContent = comments;
-      socialComments.forEach((comment, index) => {
-        comment.querySelector('.social__picture').src = comments[index].avatar;
-        comment.querySelector('.social__picture').alt = comments[index].name;
-        comment.querySelector('.social__text').textContent = comments[index].message;
-      });
-
       //добавляем body класс modal-open
       document.body.classList.add('modal-open');
 
       document.querySelector('.comments-loader').classList.add('hidden');
 
       document.addEventListener('keydown', onPopupEscKeydown);
-      // скрываем коментарии после открытия
-      const socialCommentCount = document.querySelector('.social__comment-count');
-      socialCommentCount.classList.add('hidden');
 
+
+      //получаем значение колличества комментариев в верстке
+      const socialCommentCount = document.querySelector('.social__comment-count').querySelector('.comments-count').textContent;
+      console.log(socialCommentCount);
+
+      comments.forEach((element, index) => {
+        console.log(element);
+        console.log(index);
+      });
+
+      // console.log(comments[0].length);
+      // const socialCommentCount = document.querySelector('.social__comment-count');
+      // socialCommentCount = 
+      // commentsCount.textContent = comments;
+      // socialComments.forEach((comment, index, a) => {
+      //   comment.querySelector('.social__picture').src = comments[index].avatar;
+      //   comment.querySelector('.social__picture').alt = comments[index].name;
+      //   comment.querySelector('.social__text').textContent = comments[index].message;
+      //   console.log(comments[index].message);
+      //   console.log(comments);
+      // });
+
+      // // скрываем коментарии после открытия
+      // const socialCommentCount = document.querySelector('.social__comment-count');
+      // // socialCommentCount.classList.add('hidden');
     });
 
 
@@ -74,6 +89,23 @@ const renderSimilarList = (imagePhoto) => {
   });
   listPictures.appendChild(similarListFragment);
 };
+
+// закрытие окна при помощи крестика
+closeBtn.addEventListener('click', () => {
+  hidePhoto();
+});
+
+//если фокус на инпуте хештега
+const hashContent = document.querySelector('.text__hashtags');
+hashContent.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
+});
+
+//если фокус на инпуте комментария
+const commentContent = document.querySelector('.text__description');
+commentContent.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
+});
 
 export {renderSimilarList};
 
