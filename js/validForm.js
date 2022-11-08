@@ -30,13 +30,21 @@ function isCommentValid() {
 pristine.addValidator(form.querySelector('.text__description'),isCommentValid);
 
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
   const valid = pristine.validate();
   if (valid) {
-    console.log('валидна');
-  } else {
-    console.log('не валидна');
+    const formData = new FormData(evt.target);
+
+    fetch('https://27.javascript.pages.academy/kekstagram',
+      {
+        method: 'POST',
+        body: formData,
+        headers:{
+          'Content-Type': 'multipart/form-data',
+        },
+      });
   }
 });
 

@@ -1,4 +1,5 @@
-import { similarPhoto } from './miniatures.js';
+// import { similarPhoto } from './miniatures.js';
+// import { renderSimilarList } from './miniatures.js';
 import { isEscButton } from './utils.js';
 const pictures = document.querySelectorAll('.picture');
 const arrayOfPictures = Array.from(pictures);
@@ -34,22 +35,22 @@ function showPhoto(element,index) {
   bigPicture.classList.remove('hidden');
 
   //добавляем картинку
-  bigPictureImg.src = similarPhoto[index].url;
+  bigPictureImg.src = renderSimilarList[index].url;
 
   //изменяем значение лайков
-  likesCount.textContent = similarPhoto[index].likes;
+  likesCount.textContent = renderSimilarList[index].likes;
 
   // изменяем коментарии
-  commentsCount.textContent = similarPhoto[index].comments.id;
+  commentsCount.textContent = renderSimilarList[index].comments.id;
 
   socialComments.forEach((comment, index) => {
-    comment.querySelector('.social__picture').src = similarPhoto[index].comments.avatar;
-    comment.querySelector('.social__picture').alt = similarPhoto[index].comments.name;
-    comment.querySelector('.social__text').textContent = similarPhoto[index].comments.message;
+    comment.querySelector('.social__picture').src = renderSimilarList[index].comments.avatar;
+    comment.querySelector('.social__picture').alt = renderSimilarList[index].comments.name;
+    comment.querySelector('.social__text').textContent = renderSimilarList[index].comments.message;
 
   });
 
-  socialCaption.textContent = similarPhoto[index].description;
+  socialCaption.textContent = renderSimilarList[index].description;
 
   //добавляем body класс modal-open
   document.body.classList.add('modal-open');
