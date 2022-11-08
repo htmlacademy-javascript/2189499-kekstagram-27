@@ -59,14 +59,20 @@ const renderSimilarList = (imagePhoto) => {
 
 
       //получаем значение колличества комментариев в верстке
-      const socialCommentCount = document.querySelector('.social__comment-count').querySelector('.comments-count').textContent;
+      let socialCommentCount = document.querySelector('.social__comment-count').querySelector('.comments-count');
       console.log(socialCommentCount);
 
+      let counterIndex = 0;
       comments.forEach((element, index) => {
+       
+        
         console.log(element);
         console.log(index);
+        if (index) {
+          counterIndex++;
+        }
       });
-
+      socialCommentCount.textContent = counterIndex;
       // console.log(comments[0].length);
       // const socialCommentCount = document.querySelector('.social__comment-count');
       // socialCommentCount = 
