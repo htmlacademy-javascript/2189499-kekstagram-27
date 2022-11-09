@@ -64,15 +64,24 @@ const renderSimilarList = (imagePhoto) => {
       const socialCommentCount = document.querySelector('.social__comment-count');
       const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 
+      // Место для коментариев 
+      const socialComments = document.querySelector('.social__comments');
+
       let counterIndex = 0;
       comments.forEach((element, index) => {
        
         
-        // console.log(element);
-        // console.log(index);
+        console.log(element);
+        console.log(index);
         if (index) {
           counterIndex++;
         }
+      
+      // const commentElement = document.querySelector('.');
+      const commentTemplate = comment.content.cloneNode(true);
+      //добавляем темплейт в ul коментариев 
+      socialComments.append(commentTemplate);
+      console.log(commentTemplate);
 
       });
       if (counterIndex <= 5) {

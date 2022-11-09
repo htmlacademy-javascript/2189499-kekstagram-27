@@ -14,8 +14,6 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
       return response.json();
-    } else {
-      alert('error 200-299');
     }
   })
   .then((data) => {
