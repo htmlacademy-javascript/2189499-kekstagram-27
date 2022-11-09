@@ -59,20 +59,32 @@ const renderSimilarList = (imagePhoto) => {
 
 
       //получаем значение колличества комментариев в верстке
-      let socialCommentCount = document.querySelector('.social__comment-count').querySelector('.comments-count');
-      console.log(socialCommentCount);
+      
+      
+      const socialCommentCount = document.querySelector('.social__comment-count');
+      const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 
       let counterIndex = 0;
       comments.forEach((element, index) => {
        
         
-        console.log(element);
-        console.log(index);
+        // console.log(element);
+        // console.log(index);
         if (index) {
           counterIndex++;
         }
+
       });
-      socialCommentCount.textContent = counterIndex;
+      if (counterIndex <= 5) {
+        socialCommentCount.classList.add('hidden');
+      } else {
+        socialCommentCount.classList.remove('hidden');
+        socialCommentCountNumber.textContent = counterIndex;
+      }
+      //отрсовываем колличество коментариев
+      
+      
+      
       // console.log(comments[0].length);
       // const socialCommentCount = document.querySelector('.social__comment-count');
       // socialCommentCount = 
