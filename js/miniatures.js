@@ -53,7 +53,6 @@ const renderSimilarList = (imagePhoto) => {
       //добавляем body класс modal-open
       document.body.classList.add('modal-open');
 
-      document.querySelector('.comments-loader').classList.add('hidden');
 
       document.addEventListener('keydown', onPopupEscKeydown);
 
@@ -64,16 +63,44 @@ const renderSimilarList = (imagePhoto) => {
       const socialCommentCount = document.querySelector('.social__comment-count');
       const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 
+
+
+
       // Место для коментариев 
       const socialComments = document.querySelector('.social__comments');
+      const commentTemplate = document.querySelector('#comment');
+      const btn = document.querySelector('.social__comment-loader');
+      let commentPage = 1;
+      const perChunks = 5; 
+      const maxPages = Math.ceil(comments.length / perChunks);
+      console.log(comments);
+      const commentChunks = comments.reduce((resultArray, item, index) => {
+        if (index % 5 === 0) {
+          resultArray.push([]);
+        }
+        resultArray[resultArray.length - 1].push(item);
+        return resultArray;
+      }, []);
 
-      let counterIndex = 0;
+      console.log(commentChunks);
+
+      // const renderComments = (page) => {};
+
+      // renderComments(commentPage);
+      
+      // btn. addEventListener('click', () => {});
+
+
+
+
+
+      let counterIndex = 1;
       comments.forEach((element, index) => {
       
       
         
-        console.log(element);
-        console.log(index);
+        // console.log(element);
+        // console.log(index);
         if (index) {
           counterIndex++;
         }
