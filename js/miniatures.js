@@ -69,7 +69,8 @@ const renderSimilarList = (imagePhoto) => {
 
       let counterIndex = 0;
       comments.forEach((element, index) => {
-       
+      
+      
         
         console.log(element);
         console.log(index);
@@ -80,8 +81,12 @@ const renderSimilarList = (imagePhoto) => {
       // const commentElement = document.querySelector('.');
       const commentTemplate = comment.content.cloneNode(true);
       //добавляем темплейт в ul коментариев 
-      socialComments.append(commentTemplate);
       console.log(commentTemplate);
+      //добавляем в коментарий информацию
+      commentTemplate.querySelector('.social__picture').src = element.avatar;
+      commentTemplate.querySelector('.social__picture').alt = element.name;
+      commentTemplate.querySelector('.social__text').textContent =element.message;
+      socialComments.append(commentTemplate);
 
       });
       if (counterIndex <= 5) {
