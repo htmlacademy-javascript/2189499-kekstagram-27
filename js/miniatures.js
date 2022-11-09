@@ -81,7 +81,7 @@ const renderSimilarList = (imagePhoto) => {
       // const commentElement = document.querySelector('.');
       const commentTemplate = comment.content.cloneNode(true);
       //добавляем темплейт в ul коментариев 
-      console.log(commentTemplate);
+      
       //добавляем в коментарий информацию
       commentTemplate.querySelector('.social__picture').src = element.avatar;
       commentTemplate.querySelector('.social__picture').alt = element.name;
