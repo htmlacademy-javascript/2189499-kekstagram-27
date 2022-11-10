@@ -1,18 +1,14 @@
-// import {photo} from './createPhoto.js';
-
+import { isEscButton } from './utils.js';
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
 const listPictures = document.querySelector('.pictures'); //куда вставляем
-
 const pictureSocial = document.querySelector('.big-picture__social');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = document.querySelector('.big-picture__img').querySelector('img');
 const likesCount = pictureSocial.querySelector('.likes-count');
-const commentsCount = document.querySelector('.comments-count');
-const socialComments = document.querySelector('.social__comments').querySelectorAll('li');
 const closeBtn = document.querySelector('#picture-cancel');
-
-
-import { isEscButton } from './utils.js';
+//получаем значение колличества комментариев в верстке
+const socialCommentCount = document.querySelector('.social__comment-count');
+const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -22,17 +18,25 @@ const onPopupEscKeydown = (evt) => {
 };
 
 //функция удаления класа modal-open и скрытие через класс hiden
-function hidePhoto() {
+const hidePhoto = () => {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   document.getElementById('comments-list').innerHTML = '';
 }
 
+const showPhoto = () => {
+  bigPicture.classList.remove('hidden');
+  //добавляем body класс modal-open
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onPopupEscKeydown);
+};
 
 const array = [];
-// const similarPhoto = photo(8);
+
+
 const renderSimilarList = (imagePhoto) => {
+
   const similarListFragment = document.createDocumentFragment();
 
   imagePhoto.forEach(({url, comments, likes}) => {
@@ -43,7 +47,8 @@ const renderSimilarList = (imagePhoto) => {
     listPictures.appendChild(photoElement);
 
     photoElement.addEventListener('click', () => {
-      bigPicture.classList.remove('hidden');
+      showPhoto();
+      
 
       //добавляем картинку
       bigPictureImg.src = url;
@@ -51,25 +56,9 @@ const renderSimilarList = (imagePhoto) => {
       //изменяем значение лайков
       likesCount.textContent = likes;
 
-      //добавляем body класс modal-open
-      document.body.classList.add('modal-open');
-
-
-      document.addEventListener('keydown', onPopupEscKeydown);
-
-
-      //получаем значение колличества комментариев в верстке
-      
-      
-      const socialCommentCount = document.querySelector('.social__comment-count');
-      const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
-
-
-
 
       // Место для коментариев 
       const socialComments = document.querySelector('.social__comments');
-      const commentTemplate = document.querySelector('#comment');
       const btn = document.querySelector('.social__comments-loader');
       let commentPage = 0;
       const perChunks = 5; 
@@ -83,19 +72,14 @@ const renderSimilarList = (imagePhoto) => {
         return resultArray;
       }, []);
 
-      console.log(commentChunks);
-
-
-
       const renderComments = (page) => {
-        page = 
         commentChunks[page].forEach((elem, index, array) => {
-          console.log(elem)
+      
           const commentTemplate = comment.content.cloneNode(true);
-        commentTemplate.querySelector('.social__picture').src = elem.avatar;
-        commentTemplate.querySelector('.social__picture').alt = elem.name;
-        commentTemplate.querySelector('.social__text').textContent = elem.message;
-        socialComments.append(commentTemplate);
+          commentTemplate.querySelector('.social__picture').src = elem.avatar;
+          commentTemplate.querySelector('.social__picture').alt = elem.name;
+          commentTemplate.querySelector('.social__text').textContent = elem.message;
+          socialComments.append(commentTemplate);
         });
         
       };
@@ -105,6 +89,7 @@ const renderSimilarList = (imagePhoto) => {
       btn.addEventListener('click', () => {
         commentPage++;
         renderComments(commentPage);
+
       });
 
 
@@ -112,43 +97,17 @@ const renderSimilarList = (imagePhoto) => {
 
       let counterIndex = 1;
       comments.forEach((element, index) => {
-      
-      
-        
-        // console.log(element);
-        // console.log(index);
         if (index) {
           counterIndex++;
         }
-      
-     
-
       });
+      
       if (counterIndex <= 5) {
         socialCommentCount.classList.add('hidden');
       } else {
         socialCommentCount.classList.remove('hidden');
         socialCommentCountNumber.textContent = counterIndex;
       }
-      //отрсовываем колличество коментариев
-      
-      
-      
-      // console.log(comments[0].length);
-      // const socialCommentCount = document.querySelector('.social__comment-count');
-      // socialCommentCount = 
-      // commentsCount.textContent = comments;
-      // socialComments.forEach((comment, index, a) => {
-      //   comment.querySelector('.social__picture').src = comments[index].avatar;
-      //   comment.querySelector('.social__picture').alt = comments[index].name;
-      //   comment.querySelector('.social__text').textContent = comments[index].message;
-      //   console.log(comments[index].message);
-      //   console.log(comments);
-      // });
-
-      // // скрываем коментарии после открытия
-      // const socialCommentCount = document.querySelector('.social__comment-count');
-      // // socialCommentCount.classList.add('hidden');
     });
 
 
