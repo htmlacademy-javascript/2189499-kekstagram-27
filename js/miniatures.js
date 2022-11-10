@@ -18,7 +18,7 @@ const onPopupEscKeydown = (evt) => {
 };
 
 //функция удаления класа modal-open и скрытие через класс hiden
-const hidePhoto = () => {
+function hidePhoto() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
