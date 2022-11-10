@@ -69,11 +69,11 @@ const renderSimilarList = (imagePhoto) => {
       // Место для коментариев 
       const socialComments = document.querySelector('.social__comments');
       const commentTemplate = document.querySelector('#comment');
-      const btn = document.querySelector('.social__comment-loader');
-      let commentPage = 1;
+      const btn = document.querySelector('.social__comments-loader');
+      let commentPage = 0;
       const perChunks = 5; 
       const maxPages = Math.ceil(comments.length / perChunks);
-      console.log(comments);
+
       const commentChunks = comments.reduce((resultArray, item, index) => {
         if (index % 5 === 0) {
           resultArray.push([]);
@@ -84,12 +84,27 @@ const renderSimilarList = (imagePhoto) => {
 
       console.log(commentChunks);
 
-      // const renderComments = (page) => {};
 
-      // renderComments(commentPage);
+
+      const renderComments = (page) => {
+        page = 
+        commentChunks[page].forEach((elem, index, array) => {
+          console.log(elem)
+          const commentTemplate = comment.content.cloneNode(true);
+        commentTemplate.querySelector('.social__picture').src = elem.avatar;
+        commentTemplate.querySelector('.social__picture').alt = elem.name;
+        commentTemplate.querySelector('.social__text').textContent = elem.message;
+        socialComments.append(commentTemplate);
+        });
+        
+      };
+
+      renderComments(commentPage);
       
-      // btn. addEventListener('click', () => {});
-
+      btn.addEventListener('click', () => {
+        commentPage++;
+        renderComments(commentPage);
+      });
 
 
 
@@ -105,15 +120,7 @@ const renderSimilarList = (imagePhoto) => {
           counterIndex++;
         }
       
-      // const commentElement = document.querySelector('.');
-      const commentTemplate = comment.content.cloneNode(true);
-      //добавляем темплейт в ul коментариев 
-      
-      //добавляем в коментарий информацию
-      commentTemplate.querySelector('.social__picture').src = element.avatar;
-      commentTemplate.querySelector('.social__picture').alt = element.name;
-      commentTemplate.querySelector('.social__text').textContent =element.message;
-      socialComments.append(commentTemplate);
+     
 
       });
       if (counterIndex <= 5) {
