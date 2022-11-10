@@ -26,6 +26,7 @@ function hidePhoto() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
+  document.getElementById('comments-list').innerHTML = '';
 }
 
 
