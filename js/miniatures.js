@@ -9,6 +9,8 @@ const closeBtn = document.querySelector('#picture-cancel');
 //получаем значение колличества комментариев в верстке
 const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
+const array = [];
+const similarListFragment = document.createDocumentFragment();
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -81,17 +83,8 @@ const showComment = (comments) => {
   }
 };
 
-
-
-const array = [];
-
-
-const renderSimilarList = (imagePhoto) => {
-
-  const similarListFragment = document.createDocumentFragment();
-
-
-  imagePhoto.forEach(({url, comments, likes}) => {
+const showPhoto = (photo) => {
+  photo.forEach(({url, comments, likes}) => {
     const photoElement = templatePhoto.cloneNode(true);
     photoElement.querySelector('.picture__img').src = url;
     photoElement.querySelector('.picture__comments').textContent = comments.id;
@@ -121,6 +114,15 @@ const renderSimilarList = (imagePhoto) => {
     listPictures.appendChild(similarListFragment);
   });
 };
+
+
+
+
+
+const renderSimilarList = (imagePhoto) => {
+  showPhoto(imagePhoto);
+};
+
 
 // закрытие окна при помощи крестика
 closeBtn.addEventListener('click', () => {
