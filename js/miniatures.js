@@ -11,8 +11,8 @@ const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 const array = [];
 const similarListFragment = document.createDocumentFragment();
-const socialCommentLoader = document.querySelector('social__comments-loader');
-
+const socialCommentLoader = document.querySelector('.comments-loader');
+const commentsOnPage = document.querySelector('.comments-on-page');
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -30,6 +30,9 @@ function hidePhoto () {
 }
 
 
+
+
+
 const showComment = (comments) => {
   // Место для коментариев 
   const socialComments = document.querySelector('.social__comments');
@@ -37,13 +40,33 @@ const showComment = (comments) => {
   let commentPage = 0;
   const perChunks = 5;
   const maxPages = Math.ceil(comments.length / perChunks);
+  //указали количество комментариев общее
+  socialCommentCountNumber.textContent = comments.length
+
   const commentChunks = comments.reduce((resultArray, item, index) => {
+   
     if (index % 5 === 0) {
       resultArray.push([]);
     }
     resultArray[resultArray.length - 1].push(item);
     return resultArray;
   }, []);
+  
+  
+ 
+  const renderCommentsCount = (page) => {
+    const commentsShow = commentChunks.slice(0, page + 1).reduce((allComments, chunks) => allComments.concat(chunks), []).length;
+    console.log(commentsShow);
+    commentsOnPage.textContent = commentsShow;
+   
+    if ((commentsShow < 5) || (comments.length == commentsShow)) {
+      btn.classList.add('hidden');
+    } else {
+      btn.classList.remove('hidden');
+    }
+  
+  };
+
 
   const renderComments = (page) => {
     commentChunks[page].forEach((elem, index, array) => {
@@ -55,35 +78,23 @@ const showComment = (comments) => {
     });
 
   };
-
+  
 
   renderComments(commentPage);
+  renderCommentsCount(commentPage);
 
+  
+  
   btn.addEventListener('click', () => {
-    const currentPage = ++commentPage;
-    if (currentPage == maxPages) {
-      btn.classList.add('hidden');
-    }
+    commentPage++
     renderComments(commentPage);
+    renderCommentsCount(commentPage);
   });
 
-  let counterIndex = 1;
-  comments.forEach((element, index) => {
-
-    if (index) {
-      counterIndex++;
-    }
-
-  });
-  if (counterIndex <= 5) {
-    socialCommentCount.classList.add('hidden');
-    btn.classList.add('hidden');
-  } else {
-    socialCommentCount.classList.remove('hidden');
-    socialCommentCountNumber.textContent = counterIndex;
-    btn.classList.remove('hidden');
-  }
-
+  
+  
+  
+  
 };
 
 const showPhoto = (photo) => {
@@ -121,6 +132,8 @@ const showPhoto = (photo) => {
 const renderSimilarList = (imagePhoto) => {
   showPhoto(imagePhoto);
 };
+
+
 
 
 // закрытие окна при помощи крестика
