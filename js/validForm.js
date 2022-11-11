@@ -36,12 +36,13 @@ form.addEventListener('submit', (evt) => {
   const valid = pristine.validate();
   if (valid) {
     const formData = new FormData(evt.target);
-
     fetch('https://27.javascript.pages.academy/kekstagram',
       {
         method: 'POST',
         body: formData,
       });
+    const sucsessForm = success.content.cloneNode(true);
+    document.body.appendChild(sucsessForm);
   }
 });
 
