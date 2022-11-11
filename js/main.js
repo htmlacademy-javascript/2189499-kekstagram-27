@@ -11,7 +11,6 @@ import { renderSimilarList } from './miniatures.js';
 const SIMILAR_WIZARD_COUNT = 10;
 const imgUploadSelectImage = document.getElementById('upload-select-image');
 const idErrorMessage = document.getElementById('error-message');
-console.log(imgUploadSelectImage);
 fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
