@@ -60,7 +60,6 @@ const showComment = (comments) => {
   };
 
 
-
   renderComments(commentPage);
 
   btn.addEventListener('click', () => {
@@ -70,7 +69,6 @@ const showComment = (comments) => {
     }
     renderComments(commentPage);
   });
-  
 
   let counterIndex = 1;
   comments.forEach((element, index) => {

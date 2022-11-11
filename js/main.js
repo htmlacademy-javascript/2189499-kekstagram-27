@@ -9,7 +9,9 @@ import './effect.js';
 import { renderSimilarList } from './miniatures.js';
 
 const SIMILAR_WIZARD_COUNT = 10;
-
+const imgUploadSelectImage = document.getElementById('upload-select-image');
+const idErrorMessage = document.getElementById('error-message');
+console.log(imgUploadSelectImage);
 fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
@@ -17,8 +19,14 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
     }
   })
   .then((data) => {
-    renderSimilarList(data.slice(0, SIMILAR_WIZARD_COUNT))
+    renderSimilarList(data.slice(0, SIMILAR_WIZARD_COUNT));
   })
-  .catch(() => alert('error url in fetch'));
+  .catch(() => {
+    imgUploadSelectImage.classList.add('hidden');
+    idErrorMessage.classList.remove('hidden');
+    document.querySelector('.error-messgae__button').addEventListener('click', () => {
+      location.reload();
+    });
+  });
 
 

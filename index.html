@@ -12,6 +12,12 @@
 
   <body>
     <main>
+      <div class="error-message-wrapper hidden" id="error-message">
+        <h2 class="error-message__title">
+          Возникла ошибка при загрузке данных
+        </h2>
+        <button class="error-messgae__button">Обновить страницу</button>
+      </div>
       <!-- Фильтрация изображений от других пользователей -->
       <section class="img-filters img-filters--inactive container">
         <h2 class="img-filters__title visually-hidden">Фильтр фотографий</h2>
@@ -304,9 +310,7 @@
             <div class="social__comment-count">
               5 из <span class="comments-count">125</span> комментариев
             </div>
-            <ul class="social__comments" id="comments-list">
-              
-            </ul>
+            <ul class="social__comments" id="comments-list"></ul>
 
             <!-- Кнопка для загрузки новой порции комментариев -->
             <button
