@@ -11,6 +11,7 @@ const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 const array = [];
 const similarListFragment = document.createDocumentFragment();
+const socialCommentLoader = document.querySelector('social__comments-loader');
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -20,7 +21,7 @@ const onPopupEscKeydown = (evt) => {
 };
 
 //функция удаления класа modal-open и скрытие через класс hiden
-const hidePhoto = () => {
+function hidePhoto () {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
@@ -45,6 +46,8 @@ const showComment = (comments) => {
   }, []);
 
 
+
+
   const renderComments = (page) => {
     commentChunks[page].forEach((elem, index, array) => {
       const commentTemplate = comment.content.cloneNode(true);
@@ -56,15 +59,18 @@ const showComment = (comments) => {
 
   };
 
+
+
   renderComments(commentPage);
 
   btn.addEventListener('click', () => {
-    commentPage++;
+    const currentPage = ++commentPage;
+    if (currentPage === maxPages) {
+      btn.classList.add('hidden');
+    }
     renderComments(commentPage);
-
-
   });
-
+  
 
   let counterIndex = 1;
   comments.forEach((element, index) => {
@@ -72,14 +78,17 @@ const showComment = (comments) => {
     if (index) {
       counterIndex++;
     }
-  console.log(counterIndex);
+
   });
   if (counterIndex <= 5) {
     socialCommentCount.classList.add('hidden');
+    btn.classList.add('hidden');
   } else {
     socialCommentCount.classList.remove('hidden');
     socialCommentCountNumber.textContent = counterIndex;
+    btn.classList.remove('hidden');
   }
+
 };
 
 const showPhoto = (photo) => {
