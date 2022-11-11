@@ -47,7 +47,6 @@ const showComment = (comments) => {
 
   const renderComments = (page) => {
     commentChunks[page].forEach((elem, index, array) => {
-
       const commentTemplate = comment.content.cloneNode(true);
       commentTemplate.querySelector('.social__picture').src = elem.avatar;
       commentTemplate.querySelector('.social__picture').alt = elem.name;
@@ -73,7 +72,7 @@ const showComment = (comments) => {
     if (index) {
       counterIndex++;
     }
-
+  console.log(counterIndex);
   });
   if (counterIndex <= 5) {
     socialCommentCount.classList.add('hidden');
@@ -87,7 +86,7 @@ const showPhoto = (photo) => {
   photo.forEach(({url, comments, likes}) => {
     const photoElement = templatePhoto.cloneNode(true);
     photoElement.querySelector('.picture__img').src = url;
-    photoElement.querySelector('.picture__comments').textContent = comments.id;
+    photoElement.querySelector('.picture__comments').textContent = comments.length;
     photoElement.querySelector('.picture__likes').textContent = likes;
     listPictures.appendChild(photoElement);
 
@@ -114,9 +113,6 @@ const showPhoto = (photo) => {
     listPictures.appendChild(similarListFragment);
   });
 };
-
-
-
 
 
 const renderSimilarList = (imagePhoto) => {
