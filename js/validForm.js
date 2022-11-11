@@ -43,6 +43,11 @@ form.addEventListener('submit', (evt) => {
       });
     const sucsessForm = success.content.cloneNode(true);
     document.body.appendChild(sucsessForm);
+    const sucsessBtn = document.querySelector('.success__button');
+    sucsessBtn.addEventListener('click', () => {
+      const success = document.querySelector('.success');
+      success.remove();
+    });
   }
 });
 
