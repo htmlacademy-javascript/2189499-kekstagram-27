@@ -49,6 +49,10 @@ const hideSucsessWindow = () => {
 };
 
 
+
+
+
+const setUserFormSubmit = (onSccess) => {
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
@@ -60,16 +64,17 @@ form.addEventListener('submit', (evt) => {
     {
       method: 'POST',
       body: formData,
-    });
-  const sucsessForm = success.content.cloneNode(true);
-  document.body.appendChild(sucsessForm);
-  const sucsessBtn = document.querySelector('.success__button');
+    })
+    .then (() => onSccess());
+  // const sucsessForm = success.content.cloneNode(true);
+  // document.body.appendChild(sucsessForm);
+  // const sucsessBtn = document.querySelector('.success__button');
 
-  sucsessBtn.addEventListener('click', () => {
-    hideSucsessWindow();
-  });
+  // sucsessBtn.addEventListener('click', () => {
+  //   hideSucsessWindow();
+  // });
 
-  window.addEventListener('keydown', onPopupEscKeydown);
+  // window.addEventListener('keydown', onPopupEscKeydown);
 
   // document.addEventListener('click', () => {
   //   hideSucsessWindow();
@@ -77,4 +82,6 @@ form.addEventListener('submit', (evt) => {
   // });
   } 
 });
+};
 
+export {setUserFormSubmit};
