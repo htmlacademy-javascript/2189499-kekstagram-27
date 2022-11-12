@@ -23,7 +23,9 @@ const showSuccess = () => {
   const section = document.querySelector('.success');
   section.addEventListener('click', hideSucsessWindow);
 
- 
+  resetScale();
+  resetModalWindow();
+  clearHashAndText();
 };
 
 fetch ('https://27.javascript.pages.academy/kekstagram/data')
@@ -43,4 +45,5 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
     });
   });
 
-setUserFormSubmit(resetScale, resetModalWindow, clearHashAndText, showSuccess);
+
+setUserFormSubmit(showSuccess);
