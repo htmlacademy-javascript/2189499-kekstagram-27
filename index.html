@@ -12,12 +12,6 @@
 
   <body>
     <main>
-      <div class="error-message-wrapper hidden" id="error-message">
-        <h2 class="error-message__title">
-          Возникла ошибка при загрузке данных
-        </h2>
-        <button class="error-messgae__button">Обновить страницу</button>
-      </div>
       <!-- Фильтрация изображений от других пользователей -->
       <section class="img-filters img-filters--inactive container">
         <h2 class="img-filters__title visually-hidden">Фильтр фотографий</h2>
@@ -308,7 +302,8 @@
             <!--  -->
             <!-- Комментарии к изображению -->
             <div class="social__comment-count">
-              <span class="comments-on-page">5</span> из <span class="comments-count">125</span> комментариев
+              <span class="comments-on-page">5</span> из
+              <span class="comments-count">125</span> комментариев
             </div>
             <ul class="social__comments" id="comments-list"></ul>
 
@@ -444,6 +439,17 @@
           <button type="button" class="success__button">Круто!</button>
         </div>
       </section>
+    </template>
+
+    <!-- Сообщение об ошибке загрузки файла -->
+    <template id="errorset">
+      <div class="back">
+        <div class="error-message-wrapper">
+          <h2 class="error-message__title">
+            Возникла ошибка при загрузке данных
+          </h2>
+        </div>
+      </div>
     </template>
 
     <!-- Экран загрузки изображения -->

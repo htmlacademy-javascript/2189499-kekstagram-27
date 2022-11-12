@@ -59,33 +59,24 @@ main {
 /*
 * Сообщение об ошибке при загрузке данных 
 */
-
-.error-message-wrapper {
+.back {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  max-width: 400px;
+}
+.error-message-wrapper {
+  z-index: 9;
+  background-color: #a56b2c;
+  text-align: center;
   height: 150px;
-  margin: 150px auto;
-  border-radius: 10px;
-  background-color: #cccccc;
-  box-shadow: 5px 5px 10px #020202;
+  padding: 20px;
+  border-radius: 20px;
 }
 
 .error-message__title {
-  font-size: 22px;
   text-align: center;
-  color: #000000;
 }
 
-.error-messgae__button {
-  max-width: 200px;
-  background-color:#eed21e;
-  border-radius: 30px;
-  margin: 0 auto;
-  color: #020202;
-  padding: 10px 10px;
-}
+
 /**
  * Кнопка закрытия модального окна
  */

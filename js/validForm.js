@@ -1,4 +1,5 @@
-import {isEscButton} from './utils.js'
+import {isEscButton} from './utils.js';
+import { showAlert } from './utils.js';
 const form = document.getElementById('upload-select-image');
 const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const pristine = new Pristine(form);
@@ -57,7 +58,6 @@ const hideSucsessWindow = () => {
 
 
 
-
 const setUserFormSubmit = (onSccess) => {
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -66,12 +66,16 @@ form.addEventListener('submit', (evt) => {
   if (valid) {
 
      const formData = new FormData(evt.target);
-  fetch('https://27.javascript.pages.academy/kekstagram',
+  fetch('https://27.javascrt.pages.academy/kekstagram',
     {
       method: 'POST',
       body: formData,
     })
-    .then (() => onSccess());
+    .then (() => onSccess())
+    .catch((err) => {
+      console.log(err);
+      showAlert();
+    });
   } 
 });
 };
