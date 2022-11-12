@@ -7,6 +7,10 @@ const SIMILAR_WIZARD_COUNT = 10;
 const imgUploadSelectImage = document.getElementById('upload-select-image');
 const idErrorMessage = document.getElementById('error-message');
 
+const removeEventListner = () => {
+  
+}
+
 const showSuccess = () => {
   const sucsessForm = success.content.cloneNode(true);
   document.body.appendChild(sucsessForm);
@@ -15,6 +19,9 @@ const showSuccess = () => {
   sucsessBtn.addEventListener('click', () => {
     hideSucsessWindow();
   });
+
+  const section = document.querySelector('.success');
+  section.addEventListener('click', hideSucsessWindow);
 
 };
 
