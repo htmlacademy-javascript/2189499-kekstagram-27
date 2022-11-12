@@ -12,6 +12,12 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
+const clearHashAndText = () => {
+  let inputHash = document.querySelector('.text__hashtags');
+  inputHash.value = '';
+  let comment = document.querySelector('.text__description');
+  comment.value = '';
+}
 
 
 function isHashtagValid() {
@@ -84,4 +90,4 @@ form.addEventListener('submit', (evt) => {
 });
 };
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, clearHashAndText};

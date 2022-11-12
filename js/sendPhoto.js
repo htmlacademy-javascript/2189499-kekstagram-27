@@ -1,6 +1,7 @@
 import { resetScale } from './editPhoto.js';
 import { renderSimilarList } from './miniatures.js';
-import { setUserFormSubmit } from './validForm.js';
+import { clearHashAndText, setUserFormSubmit } from './validForm.js';
+import { resetModalWindow } from './effect.js';
 const SIMILAR_WIZARD_COUNT = 10;
 const imgUploadSelectImage = document.getElementById('upload-select-image');
 const idErrorMessage = document.getElementById('error-message');
@@ -24,3 +25,5 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   });
 
 setUserFormSubmit(resetScale);
+setUserFormSubmit(resetModalWindow);
+setUserFormSubmit(clearHashAndText);
