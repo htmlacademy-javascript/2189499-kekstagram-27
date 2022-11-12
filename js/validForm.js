@@ -72,22 +72,8 @@ form.addEventListener('submit', (evt) => {
       body: formData,
     })
     .then (() => onSccess());
-  // const sucsessForm = success.content.cloneNode(true);
-  // document.body.appendChild(sucsessForm);
-  // const sucsessBtn = document.querySelector('.success__button');
-
-  // sucsessBtn.addEventListener('click', () => {
-  //   hideSucsessWindow();
-  // });
-
-  // window.addEventListener('keydown', onPopupEscKeydown);
-
-  // document.addEventListener('click', () => {
-  //   hideSucsessWindow();
-  //   document.removeEventListener('click', hideSucsessWindow)
-  // });
   } 
 });
 };
 
-export {setUserFormSubmit, clearHashAndText};
+export {setUserFormSubmit, clearHashAndText, hideSucsessWindow};

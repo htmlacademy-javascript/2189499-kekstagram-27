@@ -2,10 +2,21 @@ import { resetScale } from './editPhoto.js';
 import { renderSimilarList } from './miniatures.js';
 import { clearHashAndText, setUserFormSubmit } from './validForm.js';
 import { resetModalWindow } from './effect.js';
+import { hideSucsessWindow  } from './validForm.js';
 const SIMILAR_WIZARD_COUNT = 10;
 const imgUploadSelectImage = document.getElementById('upload-select-image');
 const idErrorMessage = document.getElementById('error-message');
 
+const showSuccess = () => {
+  const sucsessForm = success.content.cloneNode(true);
+  document.body.appendChild(sucsessForm);
+  const sucsessBtn = document.querySelector('.success__button');
+
+  sucsessBtn.addEventListener('click', () => {
+    hideSucsessWindow();
+  });
+
+};
 
 fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((response) => {
@@ -27,3 +38,4 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
 setUserFormSubmit(resetScale);
 setUserFormSubmit(resetModalWindow);
 setUserFormSubmit(clearHashAndText);
+setUserFormSubmit(showSuccess);
