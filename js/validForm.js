@@ -14,11 +14,11 @@ const onPopupEscKeydown = (evt) => {
 };
 
 const clearHashAndText = () => {
-  let inputHash = document.querySelector('.text__hashtags');
+  const inputHash = document.querySelector('.text__hashtags');
   inputHash.value = '';
-  let comment = document.querySelector('.text__description');
+  const comment = document.querySelector('.text__description');
   comment.value = '';
-}
+};
 
 
 function isHashtagValid() {
@@ -56,28 +56,26 @@ const hideSucsessWindow = () => {
 };
 
 
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
+    const valid = pristine.validate();
+    if (valid) {
 
-const setUserFormSubmit = (onSccess) => {
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  const valid = pristine.validate();
-  if (valid) {
-
-     const formData = new FormData(evt.target);
-  fetch('https://27.javascrt.pages.academy/kekstagram',
-    {
-      method: 'POST',
-      body: formData,
-    })
-    .then (() => onSccess())
-    .catch((err) => {
-      console.log(err);
-      showAlert();
-    });
-  } 
-});
+      const formData = new FormData(evt.target);
+      fetch('https://27.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        })
+        .then (() => onSuccess())
+        .catch((err) => {
+          console.log(err);
+          showAlert();
+        });
+    }
+  });
 };
 
 export {setUserFormSubmit, clearHashAndText, hideSucsessWindow};

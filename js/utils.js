@@ -5,11 +5,11 @@ const isEscButton = (evt) => evt.key === 'Escape';
 
 const ALERT_SHOW_TIME = 5000;
 const showAlert = () => {
-    const errorMessage = errorset.content.cloneNode(true);
-    document.body.append(errorMessage);
-    setTimeout(() => {
-        const windowError = document.querySelector('.back');
-        windowError.remove();
-    }, ALERT_SHOW_TIME);
+  const errorMessage = errorset.content.cloneNode(true);
+  document.body.append(errorMessage);
+  setTimeout(() => {
+    const windowError = document.querySelector('.back');
+    windowError.remove();
+  }, ALERT_SHOW_TIME);
 };
 export {isEscButton, showAlert};

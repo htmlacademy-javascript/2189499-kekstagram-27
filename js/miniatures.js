@@ -30,41 +30,37 @@ function hidePhoto () {
 }
 
 
-
-
-
 const showComment = (comments) => {
-  // Место для коментариев 
+  // Место для коментариев
   const socialComments = document.querySelector('.social__comments');
   const btn = document.querySelector('.social__comments-loader');
   let commentPage = 0;
   const perChunks = 5;
   const maxPages = Math.ceil(comments.length / perChunks);
   //указали количество комментариев общее
-  socialCommentCountNumber.textContent = comments.length
+  socialCommentCountNumber.textContent = comments.length;
 
   const commentChunks = comments.reduce((resultArray, item, index) => {
-   
+
     if (index % 5 === 0) {
       resultArray.push([]);
     }
     resultArray[resultArray.length - 1].push(item);
     return resultArray;
   }, []);
-  
-  
- 
+
+
   const renderCommentsCount = (page) => {
     const commentsShow = commentChunks.slice(0, page + 1).reduce((allComments, chunks) => allComments.concat(chunks), []).length;
     console.log(commentsShow);
     commentsOnPage.textContent = commentsShow;
-   
+
     if ((commentsShow < 5) || (comments.length == commentsShow)) {
       btn.classList.add('hidden');
     } else {
       btn.classList.remove('hidden');
     }
-  
+
   };
 
 
@@ -78,62 +74,56 @@ const showComment = (comments) => {
     });
 
   };
-  
+
 
   renderComments(commentPage);
   renderCommentsCount(commentPage);
 
-  
-  
+
   btn.addEventListener('click', () => {
-    commentPage++
+    commentPage++;
     renderComments(commentPage);
     renderCommentsCount(commentPage);
   });
 
-  
-  
-  
-  
+
 };
 
 const showPhoto = (photo) => {
-    photo.forEach(({url, comments, likes}) => {
-      const photoElement = templatePhoto.cloneNode(true);
-      photoElement.querySelector('.picture__img').src = url;
-      photoElement.querySelector('.picture__comments').textContent = comments.length;
-      photoElement.querySelector('.picture__likes').textContent = likes;
-      listPictures.appendChild(photoElement);
-  
-      photoElement.addEventListener('click', () => {
-        bigPicture.classList.remove('hidden');
-        //добавляем body класс modal-open
-        document.body.classList.add('modal-open');
-  
-        document.addEventListener('keydown', onPopupEscKeydown);
-  
-  
-        //добавляем картинку
-        bigPictureImg.src = url;
-  
-        //изменяем значение лайков
-        likesCount.textContent = likes;
-  
-        showComment(comments);
-  
-        array.push(photoElement);
-  
-      });
-  
-      listPictures.appendChild(similarListFragment);
+  photo.forEach(({url, comments, likes}) => {
+    const photoElement = templatePhoto.cloneNode(true);
+    photoElement.querySelector('.picture__img').src = url;
+    photoElement.querySelector('.picture__comments').textContent = comments.length;
+    photoElement.querySelector('.picture__likes').textContent = likes;
+    listPictures.appendChild(photoElement);
+
+    photoElement.addEventListener('click', () => {
+      bigPicture.classList.remove('hidden');
+      //добавляем body класс modal-open
+      document.body.classList.add('modal-open');
+
+      document.addEventListener('keydown', onPopupEscKeydown);
+
+
+      //добавляем картинку
+      bigPictureImg.src = url;
+
+      //изменяем значение лайков
+      likesCount.textContent = likes;
+
+      showComment(comments);
+
+      array.push(photoElement);
+
     });
+
+    listPictures.appendChild(similarListFragment);
+  });
 };
 
 const renderSimilarList = (imagePhoto) => {
   showPhoto(imagePhoto);
 };
-
-
 
 
 // закрытие окна при помощи крестика
