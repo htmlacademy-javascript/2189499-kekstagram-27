@@ -52,7 +52,7 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
     }
   })
   .then((data) => {
-    renderSimilarList(data.slice(0, SIMILAR_PHOTO_COUNT));
+    renderSimilarList(data);
   })
   .then(() => {
     imgFilters.classList.remove('img-filters--inactive');

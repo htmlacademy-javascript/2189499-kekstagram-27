@@ -21,6 +21,16 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
+
+const SIMILAR_PHOTO_COUNT = 25;
+//функция по выводу разных фото(10)
+const getRandomPhoto = (photo) => {
+  const photosContainer = document.querySelector('.pictures').querySelectorAll('.picture__img');
+  console.log(photosContainer);
+};
+
+
+
 //функция удаления класа modal-open и скрытие через класс hiden
 function hidePhoto () {
   bigPicture.classList.add('hidden');
@@ -90,7 +100,12 @@ const showComment = (comments) => {
 };
 
 const showPhoto = (photo) => {
-  photo.forEach(({url, comments, likes}) => {
+  photo
+  .slice()
+  .slice(0, SIMILAR_PHOTO_COUNT)
+  .forEach(({url, comments, likes}) => {
+    getRandomPhoto();
+    
     const photoElement = templatePhoto.cloneNode(true);
     photoElement.querySelector('.picture__img').src = url;
     photoElement.querySelector('.picture__comments').textContent = comments.length;
