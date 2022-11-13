@@ -1,6 +1,25 @@
+import {isEscButton} from './utils.js';
+import { showAlert } from './utils.js';
 const form = document.getElementById('upload-select-image');
 const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const pristine = new Pristine(form);
+
+
+//ESC
+const onPopupEscKeydown = (evt) => {
+  if (isEscButton(evt)) {
+    evt.preventDefault();
+    hideSucsessWindow();
+  }
+};
+
+const clearHashAndText = () => {
+  const inputHash = document.querySelector('.text__hashtags');
+  inputHash.value = '';
+  const comment = document.querySelector('.text__description');
+  comment.value = '';
+};
+
 
 function isHashtagValid() {
   const input = document.querySelector('.text__hashtags').value;
@@ -30,13 +49,34 @@ function isCommentValid() {
 pristine.addValidator(form.querySelector('.text__description'),isCommentValid);
 
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const valid = pristine.validate();
-  if (valid) {
-    console.log('валидна');
-  } else {
-    console.log('не валидна');
-  }
-});
+const hideSucsessWindow = () => {
+  const success = document.querySelector('.success');
+  success.remove();
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  
+};
 
+
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const valid = pristine.validate();
+    if (valid) {
+
+      const formData = new FormData(evt.target);
+      fetch('https://27.javascript.pages.academy/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        })
+        .then (() => onSuccess())
+        .catch((err) => {
+          console.log(err);
+          showAlert();
+        });
+    }
+  });
+};
+
+export {setUserFormSubmit, clearHashAndText, hideSucsessWindow};

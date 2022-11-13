@@ -1,19 +1,15 @@
 
-//ФУНКЦИЯ РАНДОМА
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-//ФУНКЦИЯ ДЛЯ ПРОВЕРКИ ДЛИНЫ СТРОКИ
-const commentLength = (str, maxLength) => str.length < maxLength;
-
-//функция для вызова случайного элемента в массиве
-
-const getRandomElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
-
 //проверка нажатой кнопки Esc
 const isEscButton = (evt) => evt.key === 'Escape';
+//вывод сообщения об ошибке
 
-export {getRandomElement, getRandomIntInclusive, isEscButton};
+const ALERT_SHOW_TIME = 5000;
+const showAlert = () => {
+  const errorMessage = errorset.content.cloneNode(true);
+  document.body.append(errorMessage);
+  setTimeout(() => {
+    const windowError = document.querySelector('.back');
+    windowError.remove();
+  }, ALERT_SHOW_TIME);
+};
+export {isEscButton, showAlert};

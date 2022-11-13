@@ -56,6 +56,26 @@ main {
   overflow: hidden;
 }
 
+/*
+* Сообщение об ошибке при загрузке данных 
+*/
+.back {
+  display: flex;
+  justify-content: center;
+}
+.error-message-wrapper {
+  z-index: 9;
+  background-color: #a56b2c;
+  text-align: center;
+  height: 150px;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.error-message__title {
+  text-align: center;
+}
+
 
 /**
  * Кнопка закрытия модального окна
