@@ -5,6 +5,7 @@ const uploadFile = document.getElementById('upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const imgUploadCancel = document.querySelector('.img-upload__cancel');
 
+
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
     evt.preventDefault();
@@ -37,3 +38,4 @@ uploadFile.addEventListener('change', openUploadPhoto);
 imgUploadCancel.addEventListener('click', closeUploadPhoto);
 
 
+export {openUploadPhoto, closeUploadPhoto};

@@ -52,7 +52,8 @@ pristine.addValidator(form.querySelector('.text__description'),isCommentValid);
 const hideSucsessWindow = () => {
   const success = document.querySelector('.success');
   success.remove();
-  window.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('keydown', onPopupEscKeydown);
+  
 };
 
 

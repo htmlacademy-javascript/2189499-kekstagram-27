@@ -4,9 +4,11 @@ import { clearHashAndText, setUserFormSubmit } from './validForm.js';
 import { resetModalWindow } from './effect.js';
 import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
+import { closeUploadPhoto, openUploadPhoto } from './uploadImage.js';
 const SIMILAR_WIZARD_COUNT = 10;
 const imgUploadSelectImage = document.getElementById('upload-select-image');
 const idErrorMessage = document.getElementById('error-message');
+const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 
 
 //ESC
@@ -15,6 +17,23 @@ const onPopupEscKeydown = (evt) => {
     evt.preventDefault();
     hideSucsessWindow();
   }
+};
+
+//esc
+const onPopupEsc = (evt) => {
+  const windowSuccess = document.querySelector('.success');
+  if (isEscButton(evt)) {
+    if (windowSuccess) {
+      console.log('сообщение есть');
+      windowSuccess.remove();
+      openUploadPhoto(evt);
+  } else {
+    console.log('сообщения нет');
+    // closeUploadPhoto();
+  }
+document.removeEventListener('keydown', onPopupEsc);
+};
+
 };
 
 
@@ -31,7 +50,7 @@ const showSuccess = () => {
   const section = document.querySelector('.success');
   section.addEventListener('click', hideSucsessWindow);
 
-  window.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', onPopupEsc);
 
   resetScale();
   resetModalWindow();
