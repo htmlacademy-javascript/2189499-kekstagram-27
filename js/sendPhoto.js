@@ -5,10 +5,8 @@ import { resetModalWindow } from './effect.js';
 import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
 import { closeUploadPhoto, openUploadPhoto } from './uploadImage.js';
-const SIMILAR_WIZARD_COUNT = 10;
-const imgUploadSelectImage = document.getElementById('upload-select-image');
-const idErrorMessage = document.getElementById('error-message');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+const SIMILAR_PHOTO_COUNT = 25;
+const imgFilters = document.querySelector('.img-filters');
 
 
 
@@ -54,15 +52,11 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
     }
   })
   .then((data) => {
-    renderSimilarList(data.slice(0, SIMILAR_WIZARD_COUNT));
+    renderSimilarList(data.slice(0, SIMILAR_PHOTO_COUNT));
   })
-  .catch(() => {
-    imgUploadSelectImage.classList.add('hidden');
-    idErrorMessage.classList.remove('hidden');
-    document.querySelector('.error-messgae__button').addEventListener('click', () => {
-      location.reload();
+  .then(() => {
+    imgFilters.classList.remove('img-filters--inactive');
     });
-  });
 
 
 setUserFormSubmit(showSuccess);
