@@ -11,25 +11,15 @@ const idErrorMessage = document.getElementById('error-message');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 
 
-//ESC
-const onPopupEscKeydown = (evt) => {
-  if (isEscButton(evt)) {
-    evt.preventDefault();
-    hideSucsessWindow();
-  }
-};
+
 
 //esc
 const onPopupEsc = (evt) => {
   const windowSuccess = document.querySelector('.success');
   if (isEscButton(evt)) {
     if (windowSuccess) {
-      console.log('сообщение есть');
       windowSuccess.remove();
       openUploadPhoto(evt);
-  } else {
-    console.log('сообщения нет');
-    // closeUploadPhoto();
   }
 document.removeEventListener('keydown', onPopupEsc);
 };
