@@ -29,18 +29,30 @@ const onPopupEscKeydown = (evt) => {
   const randBtn = document.getElementById('filter-random');
   randBtn.addEventListener('click', () => {
     const PHOTO_RAN__COUNT = 10;
-    const arrayPhotos = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
+    const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
     // console.log(arrayPhotos.sort(() => .5 - Math.random()).slice(0,n)); 
     document.querySelectorAll('.picture')
       .forEach((photo) => {
         photo.remove();
       });
 
-      renderSimilarList(arrayPhotos);
+      renderSimilarList(arrayPhotosRand);
   });
 // }
 
-const SIMILAR_PHOTO_COUNT = 25;
+
+//функция для нажатия на обсуждаемые 
+const popularBtn = document.getElementById('filter-discussed');
+popularBtn.addEventListener('click', () => {
+
+  const arrayPhotos =  photosFromServer.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
+  console.log(arrayPhotos);
+  document.querySelectorAll('.picture')
+  .forEach((photo) => {
+    photo.remove();
+  });
+  renderSimilarList(arrayPhotos);
+});
 
 
 //функция по выводу разных фото(10)
@@ -120,10 +132,10 @@ const showComment = (comments) => {
 
 const showPhoto = (photo) => {
   photo
-  .slice()
+  // .slice()
   // .sort(setRandBtn)
   .forEach(({url, comments, likes}) => {
-    getRandomPhoto();
+    // getRandomPhoto();
     
     const photoElement = templatePhoto.cloneNode(true);
     photoElement.querySelector('.picture__img').src = url;
