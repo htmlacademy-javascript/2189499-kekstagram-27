@@ -1,4 +1,5 @@
 import { isEscButton } from './utils.js';
+import { photosFromServer } from './sendPhoto.js';
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
 const listPictures = document.querySelector('.pictures'); //куда вставляем
 const pictureSocial = document.querySelector('.big-picture__social');
@@ -22,7 +23,22 @@ const onPopupEscKeydown = (evt) => {
 };
 
 
+//функция для нажатия случайные
+const setRandBtn = (cb) => {
+  const randBtn = document.getElementById('filter-random');
+  randBtn.addEventListener('click', () => {
+    const arrayPhotos = photosFromServer.slice(5, 15);
+    console.log(arrayPhotos);
+    document.querySelectorAll('.picture')
+      .forEach((photo) => {
+        photo.remove();
+      });
+  });
+}
+
 const SIMILAR_PHOTO_COUNT = 25;
+
+
 //функция по выводу разных фото(10)
 const getRandomPhoto = (photo) => {
   const photosContainer = document.querySelector('.pictures').querySelectorAll('.picture__img');
@@ -158,6 +174,6 @@ commentContent.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
 });
 
-export {renderSimilarList};
+export {renderSimilarList, setRandBtn};
 
 
