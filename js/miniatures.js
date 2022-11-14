@@ -1,4 +1,4 @@
-import { isEscButton } from './utils.js';
+import { debounce, isEscButton } from './utils.js';
 import { photosFromServer } from './sendPhoto.js';
 
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
@@ -15,6 +15,7 @@ const array = [];
 const similarListFragment = document.createDocumentFragment();
 const socialCommentLoader = document.querySelector('.comments-loader');
 const commentsOnPage = document.querySelector('.comments-on-page');
+
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -27,16 +28,20 @@ const onPopupEscKeydown = (evt) => {
 //функция для нажатия случайные
 // const setRandBtn = (cb) => {
   const randBtn = document.getElementById('filter-random');
-  randBtn.addEventListener('click', () => {
+  const createRandPhoto = () => { 
     const PHOTO_RAN__COUNT = 10;
     const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
-    // console.log(arrayPhotos.sort(() => .5 - Math.random()).slice(0,n)); 
     document.querySelectorAll('.picture')
       .forEach((photo) => {
         photo.remove();
-      });
+    });
+    renderSimilarList(arrayPhotosRand);
+    };
 
-      renderSimilarList(arrayPhotosRand);
+  const onCange = debounce(createRandPhoto, 500);
+
+  randBtn.addEventListener('click', () => {
+    onCange();
   });
 // }
 
