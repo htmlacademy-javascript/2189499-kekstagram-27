@@ -5,7 +5,7 @@ import { resetModalWindow } from './effect.js';
 import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
 import { closeUploadPhoto, openUploadPhoto } from './uploadImage.js';
-import {setRandBtn} from './miniatures.js';
+// import {setRandBtn} from './miniatures.js';
 const SIMILAR_PHOTO_COUNT = 25;
 const imgFilters = document.querySelector('.img-filters');
 
@@ -57,7 +57,7 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((data) => {
     renderSimilarList(data);
     photosFromServer = data;
-    setRandBtn(() => renderSimilarList(data));
+    // setRandBtn(() => renderSimilarList(data));
   })
   .then(() => {
     imgFilters.classList.remove('img-filters--inactive');
@@ -66,4 +66,4 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
 
 setUserFormSubmit(showSuccess);
 
-export { photosFromServer };
+export {photosFromServer, renderSimilarList};
