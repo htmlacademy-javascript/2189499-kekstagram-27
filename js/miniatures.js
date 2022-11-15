@@ -129,40 +129,36 @@ const showComment = (comments) => {
 };
 
 const showPhoto = (photo) => {
-  photo
-  // .slice()
-  // .sort(setRandBtn)
-    .forEach(({url, comments, likes}) => {
-    // getRandomPhoto();
+  photo.forEach(({url, comments, likes}) => {
 
-      const photoElement = templatePhoto.cloneNode(true);
-      photoElement.querySelector('.picture__img').src = url;
-      photoElement.querySelector('.picture__comments').textContent = comments.length;
-      photoElement.querySelector('.picture__likes').textContent = likes;
-      listPictures.appendChild(photoElement);
+    const photoElement = templatePhoto.cloneNode(true);
+    photoElement.querySelector('.picture__img').src = url;
+    photoElement.querySelector('.picture__comments').textContent = comments.length;
+    photoElement.querySelector('.picture__likes').textContent = likes;
+    listPictures.appendChild(photoElement);
 
-      photoElement.addEventListener('click', () => {
-        bigPicture.classList.remove('hidden');
-        //добавляем body класс modal-open
-        document.body.classList.add('modal-open');
+    photoElement.addEventListener('click', () => {
+      bigPicture.classList.remove('hidden');
+      //добавляем body класс modal-open
+      document.body.classList.add('modal-open');
 
-        document.addEventListener('keydown', onPopupEscKeydown);
+      document.addEventListener('keydown', onPopupEscKeydown);
 
 
-        //добавляем картинку
-        bigPictureImg.src = url;
+      //добавляем картинку
+      bigPictureImg.src = url;
 
-        //изменяем значение лайков
-        likesCount.textContent = likes;
+      //изменяем значение лайков
+      likesCount.textContent = likes;
 
-        showComment(comments);
+      showComment(comments);
 
-        array.push(photoElement);
+      array.push(photoElement);
 
-      });
-
-      listPictures.appendChild(similarListFragment);
     });
+
+    listPictures.appendChild(similarListFragment);
+  });
 };
 
 const renderSimilarList = (imagePhoto) => {

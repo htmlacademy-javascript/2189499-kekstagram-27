@@ -6,6 +6,7 @@ import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
 import { openUploadPhoto } from './uploadImage.js';
 // import {setRandBtn} from './miniatures.js';
+import { showAlert } from './utils.js';
 
 const imgFilters = document.querySelector('.img-filters');
 
@@ -46,7 +47,7 @@ const showSuccess = () => {
 
 let photosFromServer;
 
-fetch ('https://27.javascript.pages.academy/kekstagram/data')
+fetch ('https://27.javascript.pages.acadey/kekstagram/data')
   .then((response) => {
     if (response.ok) {
       return response.json();
@@ -59,6 +60,10 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   })
   .then(() => {
     imgFilters.classList.remove('img-filters--inactive');
+  })
+  .catch((err) => {
+    console.log(err);
+    showAlert();
   });
 
 
