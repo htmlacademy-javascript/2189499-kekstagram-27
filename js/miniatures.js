@@ -23,6 +23,25 @@ const onPopupEscKeydown = (evt) => {
 };
 
 
+//функция для по умолчанию
+const usalBtn = document.getElementById('filter-default');
+const createUsualPhoto = () => {
+  const usual = photosFromServer.sort((a, b) => a.id > b.id ? 1 : -1);
+  console.log(usual);
+  document.querySelectorAll('.picture')
+    .forEach((photo) => {
+      photo.remove();
+    });
+  renderSimilarList(usual);
+};
+
+const onCangeUsual = debounce(createUsualPhoto, 500);
+
+usalBtn.addEventListener('click', () => {
+  createUsualPhoto(onCangeUsual);
+});
+
+
 //функция для нажатия случайные
 const randBtn = document.getElementById('filter-random');
 const createRandPhoto = () => {
@@ -129,36 +148,37 @@ const showComment = (comments) => {
 };
 
 const showPhoto = (photo) => {
-  photo.forEach(({url, comments, likes}) => {
+  photo
+    .forEach(({url, comments, likes}) => {
 
-    const photoElement = templatePhoto.cloneNode(true);
-    photoElement.querySelector('.picture__img').src = url;
-    photoElement.querySelector('.picture__comments').textContent = comments.length;
-    photoElement.querySelector('.picture__likes').textContent = likes;
-    listPictures.appendChild(photoElement);
+      const photoElement = templatePhoto.cloneNode(true);
+      photoElement.querySelector('.picture__img').src = url;
+      photoElement.querySelector('.picture__comments').textContent = comments.length;
+      photoElement.querySelector('.picture__likes').textContent = likes;
+      listPictures.appendChild(photoElement);
 
-    photoElement.addEventListener('click', () => {
-      bigPicture.classList.remove('hidden');
-      //добавляем body класс modal-open
-      document.body.classList.add('modal-open');
+      photoElement.addEventListener('click', () => {
+        bigPicture.classList.remove('hidden');
+        //добавляем body класс modal-open
+        document.body.classList.add('modal-open');
 
-      document.addEventListener('keydown', onPopupEscKeydown);
+        document.addEventListener('keydown', onPopupEscKeydown);
 
 
-      //добавляем картинку
-      bigPictureImg.src = url;
+        //добавляем картинку
+        bigPictureImg.src = url;
 
-      //изменяем значение лайков
-      likesCount.textContent = likes;
+        //изменяем значение лайков
+        likesCount.textContent = likes;
 
-      showComment(comments);
+        showComment(comments);
 
-      array.push(photoElement);
+        array.push(photoElement);
 
+      });
+
+      listPictures.appendChild(similarListFragment);
     });
-
-    listPictures.appendChild(similarListFragment);
-  });
 };
 
 const renderSimilarList = (imagePhoto) => {
