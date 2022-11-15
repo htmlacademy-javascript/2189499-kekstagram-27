@@ -4,12 +4,10 @@ import { clearHashAndText, setUserFormSubmit } from './validForm.js';
 import { resetModalWindow } from './effect.js';
 import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
-import { closeUploadPhoto, openUploadPhoto } from './uploadImage.js';
+import { openUploadPhoto } from './uploadImage.js';
 // import {setRandBtn} from './miniatures.js';
-const SIMILAR_PHOTO_COUNT = 25;
+
 const imgFilters = document.querySelector('.img-filters');
-
-
 
 
 //esc
@@ -19,9 +17,9 @@ const onPopupEsc = (evt) => {
     if (windowSuccess) {
       windowSuccess.remove();
       openUploadPhoto(evt);
+    }
+    document.removeEventListener('keydown', onPopupEsc);
   }
-document.removeEventListener('keydown', onPopupEsc);
-};
 
 };
 
@@ -61,7 +59,7 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   })
   .then(() => {
     imgFilters.classList.remove('img-filters--inactive');
-    });
+  });
 
 
 setUserFormSubmit(showSuccess);
