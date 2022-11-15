@@ -37,7 +37,7 @@ const pictureClear = () => {
 };
 
 //функция для по умолчанию
-const createUsualPhoto = () => {
+const createUsualBtnHandler = () => {
   usalBtn.classList.add('img-filters__button--active');
   popularBtn.classList.remove('img-filters__button--active');
   randBtn.classList.remove('img-filters__button--active');
@@ -46,16 +46,16 @@ const createUsualPhoto = () => {
   renderSimilarList(usual);
 };
 
-const onCangeUsual = debounce(createUsualPhoto, 500);
+const delayRequestUsual = debounce(createUsualBtnHandler, 500);
 
 usalBtn.addEventListener('click', () => {
-  onCangeUsual();
+  delayRequestUsual();
 });
 
 
 //функция для нажатия случайные
 
-const createRandPhoto = () => {
+const createRandBtnHandler = () => {
   randBtn.classList.add('img-filters__button--active');
   popularBtn.classList.remove('img-filters__button--active');
   usalBtn.classList.remove('img-filters__button--active');
@@ -65,16 +65,16 @@ const createRandPhoto = () => {
   renderSimilarList(arrayPhotosRand);
 };
 
-const onCangeRand = debounce(createRandPhoto, 500);
+const delayRequestRand = debounce(createRandBtnHandler, 500);
 
 randBtn.addEventListener('click', () => {
-  onCangeRand();
+  delayRequestRand();
 });
 // }
 
 
 //функция для нажатия на обсуждаемые
-const createPopularBtn = () => {
+const createPopularBtnHandler = () => {
   popularBtn.classList.add('img-filters__button--active');
   randBtn.classList.remove('img-filters__button--active');
   usalBtn.classList.remove('img-filters__button--active');
@@ -83,9 +83,9 @@ const createPopularBtn = () => {
   renderSimilarList(arrayPhotos);
 };
 
-const onCangePopular = debounce(createPopularBtn, 500);
+const delayRequestPopular = debounce(createPopularBtnHandler, 500);
 popularBtn.addEventListener('click', () => {
-  onCangePopular();
+  delayRequestPopular();
 });
 
 

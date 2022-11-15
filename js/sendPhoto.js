@@ -56,8 +56,6 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((data) => {
     renderSimilarList(data);
     photosFromServer = data;
-  })
-  .then(() => {
     imgFilters.classList.remove('img-filters--inactive');
   })
   .catch((err) => {
