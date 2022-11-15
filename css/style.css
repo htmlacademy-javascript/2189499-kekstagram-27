@@ -69,8 +69,9 @@ main {
   height: 150px;
   padding: 20px;
   border-radius: 20px;
-  position: relative;
-  top:-500px;
+  position: absolute;
+  top: 50vh;
+  transform: translatey(-50%);
 }
 
 .error-message__title {
