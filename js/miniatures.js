@@ -43,7 +43,7 @@ const createDeafultBtnHandler = () => {
   sortByRandandBtn.classList.remove('img-filters__button--active');
   const usual = photosFromServer.sort((a, b) => a.id > b.id ? 1 : -1);
   removePictures();
-  return usual;
+  renderSimilarList(usual);
 };
 
 const delayRequestUsual = debounce(createDeafultBtnHandler, 500);
@@ -62,7 +62,7 @@ const createRandBtnHandler = () => {
   const PHOTO_RAN__COUNT = 10;
   const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
   removePictures();
-  return arrayPhotosRand;
+  renderSimilarList(arrayPhotosRand);
 };
 
 const delayRequestRand = debounce(createRandBtnHandler, 500);
@@ -80,7 +80,7 @@ const createPopularBtnHandler = () => {
   sortByDeafultBtn.classList.remove('img-filters__button--active');
   const arrayPhotos = photosFromServer.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
   removePictures();
-  return arrayPhotos;
+  renderSimilarList(arrayPhotos);
 };
 
 const delayRequestPopular = debounce(createPopularBtnHandler, 500);
