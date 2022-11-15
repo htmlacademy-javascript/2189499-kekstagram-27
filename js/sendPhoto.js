@@ -47,7 +47,7 @@ const showSuccess = () => {
 
 let photosFromServer;
 
-fetch ('https://27.javascript.pages.acadey/kekstagram/data')
+fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
       return response.json();
@@ -56,7 +56,6 @@ fetch ('https://27.javascript.pages.acadey/kekstagram/data')
   .then((data) => {
     renderSimilarList(data);
     photosFromServer = data;
-    // setRandBtn(() => renderSimilarList(data));
   })
   .then(() => {
     imgFilters.classList.remove('img-filters--inactive');
