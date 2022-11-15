@@ -4,13 +4,10 @@ import { clearHashAndText, setUserFormSubmit } from './validForm.js';
 import { resetModalWindow } from './effect.js';
 import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
-import { closeUploadPhoto, openUploadPhoto } from './uploadImage.js';
-const SIMILAR_WIZARD_COUNT = 10;
-const imgUploadSelectImage = document.getElementById('upload-select-image');
-const idErrorMessage = document.getElementById('error-message');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
+import { openUploadPhoto } from './uploadImage.js';
+import { showAlert } from './utils.js';
 
-
+const imgFilters = document.querySelector('.img-filters');
 
 
 //esc
@@ -20,9 +17,9 @@ const onPopupEsc = (evt) => {
     if (windowSuccess) {
       windowSuccess.remove();
       openUploadPhoto(evt);
+    }
+    document.removeEventListener('keydown', onPopupEsc);
   }
-document.removeEventListener('keydown', onPopupEsc);
-};
 
 };
 
@@ -47,6 +44,8 @@ const showSuccess = () => {
   clearHashAndText();
 };
 
+let photosFromServer;
+
 fetch ('https://27.javascript.pages.academy/kekstagram/data')
   .then((response) => {
     if (response.ok) {
@@ -54,15 +53,16 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
     }
   })
   .then((data) => {
-    renderSimilarList(data.slice(0, SIMILAR_WIZARD_COUNT));
+    renderSimilarList(data);
+    photosFromServer = data;
+    imgFilters.classList.remove('img-filters--inactive');
   })
-  .catch(() => {
-    imgUploadSelectImage.classList.add('hidden');
-    idErrorMessage.classList.remove('hidden');
-    document.querySelector('.error-messgae__button').addEventListener('click', () => {
-      location.reload();
-    });
+  .catch((err) => {
+    console.log(err);
+    showAlert();
   });
 
 
 setUserFormSubmit(showSuccess);
+
+export {photosFromServer, renderSimilarList};

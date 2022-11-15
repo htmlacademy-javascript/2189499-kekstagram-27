@@ -53,7 +53,7 @@ const hideSucsessWindow = () => {
   const success = document.querySelector('.success');
   success.remove();
   document.removeEventListener('keydown', onPopupEscKeydown);
-  
+
 };
 
 

@@ -1,4 +1,5 @@
-import { isEscButton } from './utils.js';
+import { debounce, isEscButton } from './utils.js';
+import { photosFromServer } from './sendPhoto.js';
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
 const listPictures = document.querySelector('.pictures'); //куда вставляем
 const pictureSocial = document.querySelector('.big-picture__social');
@@ -11,8 +12,9 @@ const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
 const array = [];
 const similarListFragment = document.createDocumentFragment();
-const socialCommentLoader = document.querySelector('.comments-loader');
 const commentsOnPage = document.querySelector('.comments-on-page');
+
+
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -20,6 +22,72 @@ const onPopupEscKeydown = (evt) => {
     hidePhoto();
   }
 };
+
+//классы для активности
+const sortByPopularBtn = document.getElementById('filter-discussed');
+const sortByRandandBtn = document.getElementById('filter-random');
+const sortByDeafultBtn = document.getElementById('filter-default');
+
+//функция для очистки картинок
+const removePictures = () => {
+  document.querySelectorAll('.picture')
+    .forEach((photo) => {
+      photo.remove();
+    });
+};
+
+//функция для по умолчанию
+const createDeafultBtnHandler = () => {
+  sortByDeafultBtn.classList.add('img-filters__button--active');
+  sortByPopularBtn.classList.remove('img-filters__button--active');
+  sortByRandandBtn.classList.remove('img-filters__button--active');
+  const usual = photosFromServer.sort((a, b) => a.id > b.id ? 1 : -1);
+  removePictures();
+  renderSimilarList(usual);
+};
+
+const delayRequestUsual = debounce(createDeafultBtnHandler, 500);
+
+sortByDeafultBtn.addEventListener('click', () => {
+  delayRequestUsual();
+});
+
+
+//функция для нажатия случайные
+
+const createRandBtnHandler = () => {
+  sortByRandandBtn.classList.add('img-filters__button--active');
+  sortByPopularBtn.classList.remove('img-filters__button--active');
+  sortByDeafultBtn.classList.remove('img-filters__button--active');
+  const PHOTO_RAN__COUNT = 10;
+  const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
+  removePictures();
+  renderSimilarList(arrayPhotosRand);
+};
+
+const delayRequestRand = debounce(createRandBtnHandler, 500);
+
+sortByRandandBtn.addEventListener('click', () => {
+  delayRequestRand();
+});
+// }
+
+
+//функция для нажатия на обсуждаемые
+const createPopularBtnHandler = () => {
+  sortByPopularBtn.classList.add('img-filters__button--active');
+  sortByRandandBtn.classList.remove('img-filters__button--active');
+  sortByDeafultBtn.classList.remove('img-filters__button--active');
+  const arrayPhotos = photosFromServer.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
+  removePictures();
+  renderSimilarList(arrayPhotos);
+};
+
+const delayRequestPopular = debounce(createPopularBtnHandler, 500);
+sortByPopularBtn.addEventListener('click', () => {
+  delayRequestPopular();
+});
+
 
 //функция удаления класа modal-open и скрытие через класс hiden
 function hidePhoto () {
@@ -52,7 +120,7 @@ const showComment = (comments) => {
 
   const renderCommentsCount = (page) => {
     const commentsShow = commentChunks.slice(0, page + 1).reduce((allComments, chunks) => allComments.concat(chunks), []).length;
-    console.log(commentsShow);
+
     commentsOnPage.textContent = commentsShow;
 
     if ((commentsShow < 5) || (comments.length == commentsShow)) {
@@ -90,35 +158,37 @@ const showComment = (comments) => {
 };
 
 const showPhoto = (photo) => {
-  photo.forEach(({url, comments, likes}) => {
-    const photoElement = templatePhoto.cloneNode(true);
-    photoElement.querySelector('.picture__img').src = url;
-    photoElement.querySelector('.picture__comments').textContent = comments.length;
-    photoElement.querySelector('.picture__likes').textContent = likes;
-    listPictures.appendChild(photoElement);
+  photo
+    .forEach(({url, comments, likes}) => {
 
-    photoElement.addEventListener('click', () => {
-      bigPicture.classList.remove('hidden');
-      //добавляем body класс modal-open
-      document.body.classList.add('modal-open');
+      const photoElement = templatePhoto.cloneNode(true);
+      photoElement.querySelector('.picture__img').src = url;
+      photoElement.querySelector('.picture__comments').textContent = comments.length;
+      photoElement.querySelector('.picture__likes').textContent = likes;
+      listPictures.appendChild(photoElement);
 
-      document.addEventListener('keydown', onPopupEscKeydown);
+      photoElement.addEventListener('click', () => {
+        bigPicture.classList.remove('hidden');
+        //добавляем body класс modal-open
+        document.body.classList.add('modal-open');
+
+        document.addEventListener('keydown', onPopupEscKeydown);
 
 
-      //добавляем картинку
-      bigPictureImg.src = url;
+        //добавляем картинку
+        bigPictureImg.src = url;
 
-      //изменяем значение лайков
-      likesCount.textContent = likes;
+        //изменяем значение лайков
+        likesCount.textContent = likes;
 
-      showComment(comments);
+        showComment(comments);
 
-      array.push(photoElement);
+        array.push(photoElement);
 
+      });
+
+      listPictures.appendChild(similarListFragment);
     });
-
-    listPictures.appendChild(similarListFragment);
-  });
 };
 
 const renderSimilarList = (imagePhoto) => {
