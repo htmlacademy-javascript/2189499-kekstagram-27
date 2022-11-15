@@ -14,6 +14,7 @@ const array = [];
 const similarListFragment = document.createDocumentFragment();
 const commentsOnPage = document.querySelector('.comments-on-page');
 
+
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -21,6 +22,10 @@ const onPopupEscKeydown = (evt) => {
     hidePhoto();
   }
 };
+
+//классы для активности
+const popularBtn = document.getElementById('filter-discussed');
+const randBtn = document.getElementById('filter-random');
 
 //функция для очистки картинок
 const pictureClear = () => {
@@ -33,8 +38,10 @@ const pictureClear = () => {
 //функция для по умолчанию
 const usalBtn = document.getElementById('filter-default');
 const createUsualPhoto = () => {
+  usalBtn.classList.add('img-filters__button--active');
+  popularBtn.classList.remove('img-filters__button--active');
+  randBtn.classList.remove('img-filters__button--active');
   const usual = photosFromServer.sort((a, b) => a.id > b.id ? 1 : -1);
-  console.log(usual);
   pictureClear();
   renderSimilarList(usual);
 };
@@ -47,8 +54,11 @@ usalBtn.addEventListener('click', () => {
 
 
 //функция для нажатия случайные
-const randBtn = document.getElementById('filter-random');
+
 const createRandPhoto = () => {
+  randBtn.classList.add('img-filters__button--active');
+  popularBtn.classList.remove('img-filters__button--active');
+  usalBtn.classList.remove('img-filters__button--active');
   const PHOTO_RAN__COUNT = 10;
   const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
   pictureClear();
@@ -64,8 +74,10 @@ randBtn.addEventListener('click', () => {
 
 
 //функция для нажатия на обсуждаемые
-const popularBtn = document.getElementById('filter-discussed');
 const createPopularBtn = () => {
+  popularBtn.classList.add('img-filters__button--active');
+  randBtn.classList.remove('img-filters__button--active');
+  usalBtn.classList.remove('img-filters__button--active');
   const arrayPhotos = photosFromServer.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
   pictureClear();
   renderSimilarList(arrayPhotos);
