@@ -24,12 +24,12 @@ const onPopupEscKeydown = (evt) => {
 };
 
 //классы для активности
-const popularBtn = document.getElementById('filter-discussed');
-const randBtn = document.getElementById('filter-random');
-const usalBtn = document.getElementById('filter-default');
+const sortByPopularBtn = document.getElementById('filter-discussed');
+const sortByRandandBtn = document.getElementById('filter-random');
+const deafultBtn = document.getElementById('filter-default');
 
 //функция для очистки картинок
-const pictureClear = () => {
+const removePictures = () => {
   document.querySelectorAll('.picture')
     .forEach((photo) => {
       photo.remove();
@@ -37,18 +37,18 @@ const pictureClear = () => {
 };
 
 //функция для по умолчанию
-const createUsualBtnHandler = () => {
-  usalBtn.classList.add('img-filters__button--active');
-  popularBtn.classList.remove('img-filters__button--active');
-  randBtn.classList.remove('img-filters__button--active');
+const createDeafultBtnHandler = () => {
+  deafultBtn.classList.add('img-filters__button--active');
+  sortByPopularBtn.classList.remove('img-filters__button--active');
+  sortByRandandBtn.classList.remove('img-filters__button--active');
   const usual = photosFromServer.sort((a, b) => a.id > b.id ? 1 : -1);
-  pictureClear();
+  removePictures();
   renderSimilarList(usual);
 };
 
-const delayRequestUsual = debounce(createUsualBtnHandler, 500);
+const delayRequestUsual = debounce(createDeafultBtnHandler, 500);
 
-usalBtn.addEventListener('click', () => {
+deafultBtn.addEventListener('click', () => {
   delayRequestUsual();
 });
 
@@ -56,18 +56,18 @@ usalBtn.addEventListener('click', () => {
 //функция для нажатия случайные
 
 const createRandBtnHandler = () => {
-  randBtn.classList.add('img-filters__button--active');
-  popularBtn.classList.remove('img-filters__button--active');
-  usalBtn.classList.remove('img-filters__button--active');
+  sortByRandandBtn.classList.add('img-filters__button--active');
+  sortByPopularBtn.classList.remove('img-filters__button--active');
+  deafultBtn.classList.remove('img-filters__button--active');
   const PHOTO_RAN__COUNT = 10;
   const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
-  pictureClear();
+  removePictures();
   renderSimilarList(arrayPhotosRand);
 };
 
 const delayRequestRand = debounce(createRandBtnHandler, 500);
 
-randBtn.addEventListener('click', () => {
+sortByRandandBtn.addEventListener('click', () => {
   delayRequestRand();
 });
 // }
@@ -75,16 +75,16 @@ randBtn.addEventListener('click', () => {
 
 //функция для нажатия на обсуждаемые
 const createPopularBtnHandler = () => {
-  popularBtn.classList.add('img-filters__button--active');
+  sortByPopularBtn.classList.add('img-filters__button--active');
   randBtn.classList.remove('img-filters__button--active');
-  usalBtn.classList.remove('img-filters__button--active');
+  deafultBtn.classList.remove('img-filters__button--active');
   const arrayPhotos = photosFromServer.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
-  pictureClear();
+  removePictures();
   renderSimilarList(arrayPhotos);
 };
 
 const delayRequestPopular = debounce(createPopularBtnHandler, 500);
-popularBtn.addEventListener('click', () => {
+sortByPopularBtn.addEventListener('click', () => {
   delayRequestPopular();
 });
 

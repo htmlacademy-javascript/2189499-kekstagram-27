@@ -5,7 +5,6 @@ import { resetModalWindow } from './effect.js';
 import { hideSucsessWindow } from './validForm.js';
 import { isEscButton } from './utils.js';
 import { openUploadPhoto } from './uploadImage.js';
-// import {setRandBtn} from './miniatures.js';
 import { showAlert } from './utils.js';
 
 const imgFilters = document.querySelector('.img-filters');
