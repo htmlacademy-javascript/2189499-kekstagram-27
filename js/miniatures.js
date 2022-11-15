@@ -26,6 +26,7 @@ const onPopupEscKeydown = (evt) => {
 //классы для активности
 const popularBtn = document.getElementById('filter-discussed');
 const randBtn = document.getElementById('filter-random');
+const usalBtn = document.getElementById('filter-default');
 
 //функция для очистки картинок
 const pictureClear = () => {
@@ -36,7 +37,6 @@ const pictureClear = () => {
 };
 
 //функция для по умолчанию
-const usalBtn = document.getElementById('filter-default');
 const createUsualPhoto = () => {
   usalBtn.classList.add('img-filters__button--active');
   popularBtn.classList.remove('img-filters__button--active');
@@ -49,7 +49,7 @@ const createUsualPhoto = () => {
 const onCangeUsual = debounce(createUsualPhoto, 500);
 
 usalBtn.addEventListener('click', () => {
-  createUsualPhoto(onCangeUsual);
+  onCangeUsual();
 });
 
 
