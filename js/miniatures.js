@@ -22,16 +22,20 @@ const onPopupEscKeydown = (evt) => {
   }
 };
 
+//функция для очистки картинок
+const pictureClear = () => {
+  document.querySelectorAll('.picture')
+    .forEach((photo) => {
+      photo.remove();
+    });
+};
 
 //функция для по умолчанию
 const usalBtn = document.getElementById('filter-default');
 const createUsualPhoto = () => {
   const usual = photosFromServer.sort((a, b) => a.id > b.id ? 1 : -1);
   console.log(usual);
-  document.querySelectorAll('.picture')
-    .forEach((photo) => {
-      photo.remove();
-    });
+  pictureClear();
   renderSimilarList(usual);
 };
 
@@ -47,10 +51,7 @@ const randBtn = document.getElementById('filter-random');
 const createRandPhoto = () => {
   const PHOTO_RAN__COUNT = 10;
   const arrayPhotosRand = photosFromServer.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
-  document.querySelectorAll('.picture')
-    .forEach((photo) => {
-      photo.remove();
-    });
+  pictureClear();
   renderSimilarList(arrayPhotosRand);
 };
 
@@ -66,10 +67,7 @@ randBtn.addEventListener('click', () => {
 const popularBtn = document.getElementById('filter-discussed');
 const createPopularBtn = () => {
   const arrayPhotos = photosFromServer.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
-  document.querySelectorAll('.picture')
-    .forEach((photo) => {
-      photo.remove();
-    });
+  pictureClear();
   renderSimilarList(arrayPhotos);
 };
 
