@@ -10,7 +10,7 @@ import { showAlert } from './utils.js';
 const imgFilters = document.querySelector('.img-filters');
 
 
-//esc
+//ESC
 const onPopupEsc = (evt) => {
   const windowSuccess = document.querySelector('.success');
   if (isEscButton(evt)) {
