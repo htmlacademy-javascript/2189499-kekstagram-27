@@ -32,9 +32,9 @@ function onSmallerButtonClick() {
   return scaleImage(newValue);
 }
 
-function resetScale() {
-  return scaleImage(DEFAULT_SCALE);
-}
+const resetScale = () => {
+  scaleImage(DEFAULT_SCALE);
+};
 
 smallerBtn.addEventListener('click', onSmallerButtonClick);
 

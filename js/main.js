@@ -1,8 +1,9 @@
 import './miniatures.js';
-import './uploadImage.js';
-import './validForm.js';
-import './editPhoto.js';
+import './upload-image.js';
+import './valid-form.js';
+import './edit-photo.js';
 import './effect.js';
-import './sendPhoto.js';
+import './send-photo.js';
+import './preupload-photo.js';
 
 
