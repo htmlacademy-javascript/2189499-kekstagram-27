@@ -58,7 +58,7 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   })
   .catch(() => {
     showAlert();
-  })
+  });
 
 setUserFormSubmit(showSuccess);
 export {renderSimilarList};
