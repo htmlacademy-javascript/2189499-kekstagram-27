@@ -2,8 +2,6 @@ const form = document.querySelector('.img-upload__form');
 const image = document.querySelector('.img-upload__form img');
 const sliderElement = document.querySelector('.effect-level__slider');
 const effectLevel = document.querySelector('.effect-level__value');
-
-
 const EFFECTS = [
   //оригинал
   {

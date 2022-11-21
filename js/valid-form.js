@@ -1,9 +1,13 @@
 import {isEscButton} from './utils.js';
-import { showAlert } from './utils.js';
 const form = document.getElementById('upload-select-image');
 const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
-const pristine = new Pristine(form);
-
+const pristine = new Pristine(form,
+  {
+    classTo:'img-upload__field-wrapper',
+    errorClass:'invalid-form-pristine',
+    errorTextParent:'img-upload__field-wrapper',
+  },
+);
 
 //ESC
 const onPopupEscKeydown = (evt) => {
@@ -21,41 +25,44 @@ const clearHashAndText = () => {
 };
 
 
-function isHashtagValid() {
+const isHashtagValid = () => {
   const input = document.querySelector('.text__hashtags').value;
   const lowerCaseInput = input.toLowerCase().split(' ');
-
   const isHashtagRepeat = (new Set(lowerCaseInput).size === lowerCaseInput.length);
-
   const areAllHashtagsValid = lowerCaseInput.every((elem) => hashtag.test(elem));
   const hashtagCount = input.replace(/[^#]/g, '').length;
-  function isHashtagCount () {
-    if (hashtagCount <= 5) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  return isHashtagRepeat && areAllHashtagsValid && isHashtagCount() || input === '';
-}
+  const isHashtagCount = hashtagCount <= 5;
+  return isHashtagRepeat && areAllHashtagsValid && isHashtagCount || input === '';
+};
 
-pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid);
+pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid, 'hashtag invalid');
 
-function isCommentValid() {
+const isCommentValid = () => {
   const comment = document.querySelector('.text__description').value;
   return comment.length <= 140;
-}
+};
 
-pristine.addValidator(form.querySelector('.text__description'),isCommentValid);
+pristine.addValidator(form.querySelector('.text__description'),isCommentValid, 'comment invalid');
 
 
-const hideSucsessWindow = () => {
+function hideSucsessWindow() {
   const success = document.querySelector('.success');
   success.remove();
   document.removeEventListener('keydown', onPopupEscKeydown);
+}
 
+
+// ошибка при загрузке изображения
+const showErrorSendPhoto = () => {
+  const errorTemplate = document.getElementById('error');
+  const errorMessage = errorTemplate.content.cloneNode(true);
+  document.body.append(errorMessage);
+  const errorBtn = document.querySelector('.error__button');
+  errorBtn.addEventListener('click', () =>{
+    const errorWindow = document.querySelector('.error');
+    errorWindow.remove();
+  });
 };
-
 
 const setUserFormSubmit = (onSuccess) => {
   form.addEventListener('submit', (evt) => {
@@ -71,9 +78,8 @@ const setUserFormSubmit = (onSuccess) => {
           body: formData,
         })
         .then (() => onSuccess())
-        .catch((err) => {
-          console.log(err);
-          showAlert();
+        .catch(() => {
+          showErrorSendPhoto();
         });
     }
   });
