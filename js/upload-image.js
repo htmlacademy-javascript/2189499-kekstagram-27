@@ -1,5 +1,5 @@
 import { isEscButton } from './utils.js';
-import { resetScale } from './editPhoto.js';
+import { resetScale } from './edit-photo.js';
 import { resetModalWindow } from './effect.js';
 const uploadFile = document.getElementById('upload-file');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
