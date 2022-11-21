@@ -61,5 +61,4 @@ fetch ('https://27.javascript.pages.academy/kekstagram/data')
   })
 
 setUserFormSubmit(showSuccess);
-
 export {renderSimilarList};

@@ -52,7 +52,7 @@ function hideSucsessWindow() {
 }
 
 
-// ошибка при загрузке изображения
+// ошибка при загрузке изображени
 const showErrorSendPhoto = () => {
   const errorTemplate = document.getElementById('error');
   const errorMessage = errorTemplate.content.cloneNode(true);
