@@ -10,7 +10,6 @@ const closeBtn = document.querySelector('#picture-cancel');
 //получаем значение колличества комментариев в верстке
 const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
-const similarListFragment = document.createDocumentFragment();
 const commentsOnPage = document.querySelector('.comments-on-page');
 //классы для активности
 const sortByPopularBtn = document.getElementById('filter-discussed');
@@ -18,7 +17,7 @@ const sortByRandandBtn = document.getElementById('filter-random');
 const sortByDeafultBtn = document.getElementById('filter-default');
 const hashContent = document.querySelector('.text__hashtags');
 const commentContent = document.querySelector('.text__description');
-
+const showMoreCommentsBtn = document.querySelector('.social__comments-loader');
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -30,7 +29,6 @@ const onPopupEscKeydown = (evt) => {
 const showComment = (comments) => {
   // Место для коментариев
   const socialComments = document.querySelector('.social__comments');
-  const showMoreCommentsBtn = document.querySelector('.social__comments-loader');
   let commentPage = 0;
   //указали количество комментариев общее
   socialCommentCountNumber.textContent = comments.length;
@@ -67,20 +65,27 @@ const showComment = (comments) => {
       commentTemplateCopy.querySelector('.social__text').textContent = elem.message;
       socialComments.append(commentTemplateCopy);
     });
-
   };
 
 
   renderComments(commentPage);
   renderCommentsCount(commentPage);
 
-
-  showMoreCommentsBtn.addEventListener('click', () => {
+  const commentRender = () => {
     commentPage++;
     renderComments(commentPage);
     renderCommentsCount(commentPage);
-  });
+  };
 
+
+  showMoreCommentsBtn.addEventListener('click', commentRender);
+
+
+  // закрытие окна при помощи крестика
+closeBtn.addEventListener('click', () => {
+  hidePhoto();
+  showMoreCommentsBtn.removeEventListener('click', commentRender);
+});
 
 };
 
@@ -112,8 +117,6 @@ const showPhoto = (photo) => {
 
 
       });
-
-      listPictures.appendChild(similarListFragment);
     });
 };
 
@@ -194,13 +197,11 @@ function hidePhoto () {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   document.getElementById('comments-list').innerHTML = '';
+  // showMoreCommentsBtn.removeEventListener('click');
 }
 
 
-// закрытие окна при помощи крестика
-closeBtn.addEventListener('click', () => {
-  hidePhoto();
-});
+
 
 //если фокус на инпуте хештега
 hashContent.addEventListener('keydown', (evt) => {
