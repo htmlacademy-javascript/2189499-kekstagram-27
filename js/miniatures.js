@@ -10,7 +10,6 @@ const closeBtn = document.querySelector('#picture-cancel');
 //получаем значение колличества комментариев в верстке
 const socialCommentCount = document.querySelector('.social__comment-count');
 const socialCommentCountNumber = socialCommentCount.querySelector('.comments-count');
-const similarListFragment = document.createDocumentFragment();
 const commentsOnPage = document.querySelector('.comments-on-page');
 //классы для активности
 const sortByPopularBtn = document.getElementById('filter-discussed');
@@ -67,7 +66,6 @@ const showComment = (comments) => {
       commentTemplateCopy.querySelector('.social__text').textContent = elem.message;
       socialComments.append(commentTemplateCopy);
     });
-
   };
 
 
@@ -112,8 +110,6 @@ const showPhoto = (photo) => {
 
 
       });
-
-      listPictures.appendChild(similarListFragment);
     });
 };
 
