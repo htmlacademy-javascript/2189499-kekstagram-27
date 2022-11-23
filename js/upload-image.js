@@ -9,20 +9,20 @@ const imgUploadCancel = document.querySelector('.img-upload__cancel');
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
     evt.preventDefault();
-    closeUploadPhoto();
+    onCloseUploadPhoto();
   }
 };
 
-function openUploadPhoto(evt) {
+const onOpenUploadPhoto = (evt) => {
   evt.preventDefault();
   imgUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
 
   document.addEventListener('keydown', onPopupEscKeydown);
-}
+};
 
 
-function closeUploadPhoto() {
+function onCloseUploadPhoto() {
   imgUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
@@ -33,9 +33,9 @@ function closeUploadPhoto() {
 
 
 //открытие окна
-uploadFile.addEventListener('change', openUploadPhoto);
+uploadFile.addEventListener('change', onOpenUploadPhoto);
 //закрытие окна при помощи Х
-imgUploadCancel.addEventListener('click', closeUploadPhoto);
+imgUploadCancel.addEventListener('click', onCloseUploadPhoto);
 
 
-export {openUploadPhoto, closeUploadPhoto};
+export {onOpenUploadPhoto, onCloseUploadPhoto};
