@@ -82,10 +82,10 @@ const showComment = (comments) => {
 
 
   // закрытие окна при помощи крестика
-closeBtn.addEventListener('click', () => {
-  hidePhoto();
-  showMoreCommentsBtn.removeEventListener('click', commentRender);
-});
+  closeBtn.addEventListener('click', () => {
+    hidePhoto();
+    showMoreCommentsBtn.removeEventListener('click', commentRender);
+  });
 
 };
 
@@ -199,8 +199,6 @@ function hidePhoto () {
   document.getElementById('comments-list').innerHTML = '';
   // showMoreCommentsBtn.removeEventListener('click');
 }
-
-
 
 
 //если фокус на инпуте хештега
