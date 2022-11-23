@@ -17,7 +17,7 @@ const sortByRandandBtn = document.getElementById('filter-random');
 const sortByDeafultBtn = document.getElementById('filter-default');
 const hashContent = document.querySelector('.text__hashtags');
 const commentContent = document.querySelector('.text__description');
-
+const showMoreCommentsBtn = document.querySelector('.social__comments-loader');
 //ESC
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
@@ -29,7 +29,6 @@ const onPopupEscKeydown = (evt) => {
 const showComment = (comments) => {
   // Место для коментариев
   const socialComments = document.querySelector('.social__comments');
-  const showMoreCommentsBtn = document.querySelector('.social__comments-loader');
   let commentPage = 0;
   //указали количество комментариев общее
   socialCommentCountNumber.textContent = comments.length;
@@ -72,13 +71,21 @@ const showComment = (comments) => {
   renderComments(commentPage);
   renderCommentsCount(commentPage);
 
-
-  showMoreCommentsBtn.addEventListener('click', () => {
+  const commentRender = () => {
     commentPage++;
     renderComments(commentPage);
     renderCommentsCount(commentPage);
-  });
+  };
 
+
+  showMoreCommentsBtn.addEventListener('click', commentRender);
+
+
+  // закрытие окна при помощи крестика
+closeBtn.addEventListener('click', () => {
+  hidePhoto();
+  showMoreCommentsBtn.removeEventListener('click', commentRender);
+});
 
 };
 
@@ -190,13 +197,11 @@ function hidePhoto () {
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onPopupEscKeydown);
   document.getElementById('comments-list').innerHTML = '';
+  // showMoreCommentsBtn.removeEventListener('click');
 }
 
 
-// закрытие окна при помощи крестика
-closeBtn.addEventListener('click', () => {
-  hidePhoto();
-});
+
 
 //если фокус на инпуте хештега
 hashContent.addEventListener('keydown', (evt) => {
