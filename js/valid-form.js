@@ -1,4 +1,6 @@
 import {isEscButton} from './utils.js';
+import { onCloseUploadPhoto } from './upload-image.js';
+const VALID_COMMENT_LENGTH = 140;
 const form = document.getElementById('upload-select-image');
 const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 const pristine = new Pristine(form,
@@ -13,7 +15,7 @@ const pristine = new Pristine(form,
 const onPopupEscKeydown = (evt) => {
   if (isEscButton(evt)) {
     evt.preventDefault();
-    hideSucsessWindow();
+    onHideSucsessWindow();
   }
 };
 
@@ -39,20 +41,20 @@ pristine.addValidator(form.querySelector('.text__hashtags'),isHashtagValid, 'has
 
 const isCommentValid = () => {
   const comment = document.querySelector('.text__description').value;
-  return comment.length <= 140;
+  return comment.length <= VALID_COMMENT_LENGTH;
 };
 
 pristine.addValidator(form.querySelector('.text__description'),isCommentValid, 'comment invalid');
 
 
-function hideSucsessWindow() {
+function onHideSucsessWindow() {
   const success = document.querySelector('.success');
   success.remove();
   document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
 
-// ошибка при загрузке изображени
+// ошибка при загрузке изображения
 const showErrorSendPhoto = () => {
   const errorTemplate = document.getElementById('error');
   const errorMessage = errorTemplate.content.cloneNode(true);
@@ -78,6 +80,7 @@ const setUserFormSubmit = (onSuccess) => {
           body: formData,
         })
         .then (() => onSuccess())
+        .then (() => onCloseUploadPhoto())
         .catch(() => {
           showErrorSendPhoto();
         });
@@ -85,4 +88,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {setUserFormSubmit, clearHashAndText, hideSucsessWindow};
+export {setUserFormSubmit, clearHashAndText, onHideSucsessWindow};

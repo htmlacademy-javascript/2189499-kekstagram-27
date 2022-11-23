@@ -1,3 +1,4 @@
+const PHOTO_RAN__COUNT = 10;
 import { debounce, isEscButton } from './utils.js';
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
 const listPictures = document.querySelector('.pictures'); //куда вставляем
@@ -132,7 +133,9 @@ const removePictures = () => {
 //функция для по умолчанию
 const addDefaultBtnListener = (photos) => {
   const createDeafultBtnHandler = () => {
-
+    sortByDeafultBtn.classList.add('img-filters__button--active');
+    sortByPopularBtn.classList.remove('img-filters__button--active');
+    sortByRandandBtn.classList.remove('img-filters__button--active');
     const usual = photos.sort((a, b) => a.id > b.id ? 1 : -1);
     removePictures();
     renderSimilarList(usual);
@@ -141,9 +144,7 @@ const addDefaultBtnListener = (photos) => {
   const delayRequestUsual = debounce(createDeafultBtnHandler, 500);
 
   sortByDeafultBtn.addEventListener('click', () => {
-    sortByDeafultBtn.classList.add('img-filters__button--active');
-    sortByPopularBtn.classList.remove('img-filters__button--active');
-    sortByRandandBtn.classList.remove('img-filters__button--active');
+
     delayRequestUsual();
   });
 };
@@ -152,8 +153,9 @@ const addDefaultBtnListener = (photos) => {
 //функция для нажатия случайные
 const addRandBtnListener = (photos) => {
   const createRandBtnHandler = () => {
-
-    const PHOTO_RAN__COUNT = 10;
+    sortByRandandBtn.classList.add('img-filters__button--active');
+    sortByPopularBtn.classList.remove('img-filters__button--active');
+    sortByDeafultBtn.classList.remove('img-filters__button--active');
     const arrayPhotosRand = photos.sort(() => .5 - Math.random()).slice(0,PHOTO_RAN__COUNT);
     removePictures();
     renderSimilarList(arrayPhotosRand);
@@ -162,9 +164,7 @@ const addRandBtnListener = (photos) => {
   const delayRequestRand = debounce(createRandBtnHandler, 500);
 
   sortByRandandBtn.addEventListener('click', () => {
-    sortByRandandBtn.classList.add('img-filters__button--active');
-    sortByPopularBtn.classList.remove('img-filters__button--active');
-    sortByDeafultBtn.classList.remove('img-filters__button--active');
+
     delayRequestRand();
   });
 };
@@ -172,7 +172,9 @@ const addRandBtnListener = (photos) => {
 //функция для нажатия на обсуждаемые
 const addPopularBtnListener = (photos) => {
   const createPopularBtnHandler = () => {
-
+    sortByPopularBtn.classList.add('img-filters__button--active');
+    sortByRandandBtn.classList.remove('img-filters__button--active');
+    sortByDeafultBtn.classList.remove('img-filters__button--active');
     const arrayPhotos = photos.sort((a, b) => a.comments.length < b.comments.length ? 1 : -1);
     removePictures();
     renderSimilarList(arrayPhotos);
@@ -180,9 +182,7 @@ const addPopularBtnListener = (photos) => {
 
   const delayRequestPopular = debounce(createPopularBtnHandler, 500);
   sortByPopularBtn.addEventListener('click', () => {
-    sortByPopularBtn.classList.add('img-filters__button--active');
-    sortByRandandBtn.classList.remove('img-filters__button--active');
-    sortByDeafultBtn.classList.remove('img-filters__button--active');
+
     delayRequestPopular();
   });
 };

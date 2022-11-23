@@ -11,3 +11,4 @@ uploadPhotoBtn.addEventListener('change', () => {
   }
 });
 
+
