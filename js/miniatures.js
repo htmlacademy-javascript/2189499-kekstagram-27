@@ -1,6 +1,6 @@
- const PHOTO_RAN__COUNT = 10;
- const PHOTO_FRACTION = 5; 
- const TIME_DELAY = 500;
+const PHOTO_RAN__COUNT = 10;
+const PHOTO_FRACTION = 5;
+const TIME_DELAY = 500;
 import { debounce, isEscButton } from './utils.js';
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
 const listPictures = document.querySelector('.pictures'); //куда вставляем
@@ -59,7 +59,7 @@ const showComment = (comments) => {
 
 
   const renderComments = (page) => {
-    const similarCommentListFragment = document.createDocumentFragment()
+    const similarCommentListFragment = document.createDocumentFragment();
     commentChunks[page].forEach((elem) => {
       const commentTemplate = document.getElementById('comment');
       const commentTemplateCopy = commentTemplate.content.cloneNode(true);
@@ -79,9 +79,7 @@ const showComment = (comments) => {
     commentPage++;
     renderComments(commentPage);
     renderCommentsCount(commentPage);
-    
   };
-
 
   showMoreCommentsBtn.addEventListener('click', commentRender);
 
@@ -123,10 +121,9 @@ const showPhoto = (photo) => {
 
 
       });
-      
 
     });
-    listPictures.appendChild(similarListPhotoFragment);
+  listPictures.appendChild(similarListPhotoFragment);
 };
 
 const renderSimilarList = (imagePhoto) => {
