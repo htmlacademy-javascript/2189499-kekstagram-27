@@ -1,4 +1,6 @@
-const PHOTO_RAN__COUNT = 10;
+ const PHOTO_RAN__COUNT = 10;
+ const PHOTO_FRACTION = 5; 
+ const TIME_DELAY = 500;
 import { debounce, isEscButton } from './utils.js';
 const templatePhoto = document.querySelector('#picture').content.querySelector('.picture'); //темплейт
 const listPictures = document.querySelector('.pictures'); //куда вставляем
@@ -34,7 +36,7 @@ const showComment = (comments) => {
   socialCommentCountNumber.textContent = comments.length;
 
   const commentChunks = comments.reduce((resultArray, item, index) => {
-    if (index % 5 === 0) {
+    if (index % PHOTO_FRACTION === 0) {
       resultArray.push([]);
     }
     resultArray[resultArray.length - 1].push(item);
@@ -47,7 +49,7 @@ const showComment = (comments) => {
 
     commentsOnPage.textContent = commentsShow;
 
-    if ((commentsShow < 5) || (comments.length === commentsShow)) {
+    if ((commentsShow < PHOTO_FRACTION) || (comments.length === commentsShow)) {
       showMoreCommentsBtn.classList.add('hidden');
     } else {
       showMoreCommentsBtn.classList.remove('hidden');
@@ -57,14 +59,16 @@ const showComment = (comments) => {
 
 
   const renderComments = (page) => {
+    const similarCommentListFragment = document.createDocumentFragment()
     commentChunks[page].forEach((elem) => {
       const commentTemplate = document.getElementById('comment');
       const commentTemplateCopy = commentTemplate.content.cloneNode(true);
       commentTemplateCopy.querySelector('.social__picture').src = elem.avatar;
       commentTemplateCopy.querySelector('.social__picture').alt = elem.name;
       commentTemplateCopy.querySelector('.social__text').textContent = elem.message;
-      socialComments.append(commentTemplateCopy);
+      similarCommentListFragment.append(commentTemplateCopy);
     });
+    socialComments.appendChild(similarCommentListFragment);
   };
 
 
@@ -75,6 +79,7 @@ const showComment = (comments) => {
     commentPage++;
     renderComments(commentPage);
     renderCommentsCount(commentPage);
+    
   };
 
 
@@ -91,6 +96,7 @@ const showComment = (comments) => {
 
 
 const showPhoto = (photo) => {
+  const similarListPhotoFragment = document.createDocumentFragment();
   photo
     .forEach(({url, comments, likes}) => {
 
@@ -98,7 +104,7 @@ const showPhoto = (photo) => {
       photoElement.querySelector('.picture__img').src = url;
       photoElement.querySelector('.picture__comments').textContent = comments.length;
       photoElement.querySelector('.picture__likes').textContent = likes;
-      listPictures.appendChild(photoElement);
+      similarListPhotoFragment.appendChild(photoElement);
 
       photoElement.addEventListener('click', () => {
         bigPicture.classList.remove('hidden');
@@ -117,7 +123,10 @@ const showPhoto = (photo) => {
 
 
       });
+      
+
     });
+    listPictures.appendChild(similarListPhotoFragment);
 };
 
 const renderSimilarList = (imagePhoto) => {
@@ -144,7 +153,7 @@ const addDefaultBtnListener = (photos) => {
     renderSimilarList(usual);
   };
 
-  const delayRequestUsual = debounce(createDeafultBtnHandler, 500);
+  const delayRequestUsual = debounce(createDeafultBtnHandler, TIME_DELAY);
 
   sortByDeafultBtn.addEventListener('click', () => {
 
@@ -164,7 +173,7 @@ const addRandBtnListener = (photos) => {
     renderSimilarList(arrayPhotosRand);
   };
 
-  const delayRequestRand = debounce(createRandBtnHandler, 500);
+  const delayRequestRand = debounce(createRandBtnHandler, TIME_DELAY);
 
   sortByRandandBtn.addEventListener('click', () => {
 
@@ -183,7 +192,7 @@ const addPopularBtnListener = (photos) => {
     renderSimilarList(arrayPhotos);
   };
 
-  const delayRequestPopular = debounce(createPopularBtnHandler, 500);
+  const delayRequestPopular = debounce(createPopularBtnHandler, TIME_DELAY);
   sortByPopularBtn.addEventListener('click', () => {
 
     delayRequestPopular();
